@@ -3,35 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Portfolio - Anna-jpy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>My Portfolio</h1>
     </header>
+    <nav>
+        <ul>
+            <li><a href="#profil">Profil</a></li>
+            <li><a href="#parcours">Parcours</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#epreuves-e5">Épreuves E5</a></li>
+            <li><a href="#epreuves-e6">Épreuves E6</a></li>
+            <li><a href="#veille">Veille</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="profil">
+            <h2>Profil</h2>
+            <p>Bienvenue sur mon portfolio !</p>
+        </section>
 
-    <section id="e5-epreuves">
-        <h2>E5 Épreuves</h2>
-        <p>Details about E5 Épreuves.</p>
-    </section>
+        <section id="parcours">
+            <h2>Parcours</h2>
+            <h3>Formation</h3>
+            <ul>
+                <li>Vos diplômes et formations</li>
+            </ul>
+            <h3>Expérience Professionnelle</h3>
+            <ul>
+                <li>Vos expériences</li>
+            </ul>
+        </section>
 
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-        <p>You can also reach me at: myemail@example.com</p>
-    </section>
+        <section id="competences">
+            <h2>Compétences</h2>
+            <h3>Techniques</h3>
+            <ul>
+                <li>HTML/CSS/JavaScript</li>
+            </ul>
+        </section>
 
+        <section id="projets">
+            <h2>Projets</h2>
+            <div class="projet">
+                <h3>Nom du Projet</h3>
+                <p>Description du projet</p>
+            </div>
+        </section>
+
+        <section id="epreuves-e5">
+            <h2>Épreuves E5</h2>
+            <div class="epreuve">
+                <h3>Titre de l'Épreuve E5</h3>
+                <p>Description de l'épreuve E5</p>
+            </div>
+        </section>
+
+        <section id="epreuves-e6">
+            <h2>Épreuves E6</h2>
+            <div class="epreuve">
+                <h3>Titre de l'Épreuve E6</h3>
+                <p>Description de l'épreuve E6</p>
+            </div>
+        </section>
+
+        <section id="veille">
+            <h2>Veille Technologique</h2>
+            <div class="veille-item">
+                <h3>Thème de Veille</h3>
+                <ul>
+                    <li>Article 1</li>
+                    <li>Article 2</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>N'hésitez pas à me contacter !</p>
+            <ul class="contact-list">
+                <li><strong>Email :</strong> <a href="mailto:votre.email@example.com">votre.email@example.com</a></li>
+                <li><strong>LinkedIn :</strong> <a href="https://linkedin.com" target="_blank">Profil LinkedIn</a></li>
+                <li><strong>GitHub :</strong> <a href="https://github.com/Anna-jpy" target="_blank">GitHub Profile</a></li>
+            </ul>
+            <form class="contact-form">
+                <input type="text" placeholder="Votre nom" required>
+                <input type="email" placeholder="Votre email" required>
+                <textarea placeholder="Votre message" rows="5" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+    </main>
     <footer>
-        <p>© 2026 Anna-jpy. All rights reserved.</p>
+        <p>&copy; 2026 Anna-jpy. Tous droits réservés.</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
