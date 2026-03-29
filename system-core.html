@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Core - Portfolio SISR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00d4ff;
+            --accent-dark: #0099cc;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: #333333;
+            --glass: rgba(0, 212, 255, 0.1);
+            --glow: rgba(0, 212, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, var(--glow) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, var(--glow) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, var(--glow) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            backdrop-filter: blur(20px);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--glow);
+        }
+
+        .header-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--glass);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--glow), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .content-card:hover::before {
+            left: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px var(--glow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .card-content {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .card-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .card-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .card-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            padding: 6px 15px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Full Width Section */
+        .full-width-section {
+            background: var(--glass);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .full-width-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: scan 3s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .section-item {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .section-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 15%; left: 5%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 35%; left: 20%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { top: 55%; left: 8%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { top: 75%; left: 25%; animation-delay: 0.5s; }
+        .floating-element:nth-child(5) { top: 25%; right: 15%; animation-delay: 1.5s; }
+        .floating-element:nth-child(6) { top: 65%; right: 5%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .content-card {
+                padding: 30px;
+            }
+
+            .full-width-section {
+                padding: 30px;
+            }
+
+            .section-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 40px 0 30px;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .full-width-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">
+                <i class="fas fa-server"></i>
+                System Core
+            </div>
+            <h1 class="header-title">Mon Socle Technique</h1>
+            <p class="header-subtitle">
+                Découvrez mes compétences techniques, mes projets réalisés et ma maîtrise 
+                des outils et technologies en systèmes, réseaux et cybersécurité développées 
+                dans le cadre de mon BTS SIO SISR.
+            </p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- Infrastructure & Administration -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h2 class="card-title">Infrastructure & Administration</h2>
+                </div>
+                <div class="card-content">
+                    <p>Mon cœur de compétences repose sur la maîtrise des environnements systèmes et leur gestion avancée. J'assure la mise en place, la configuration et l'administration de serveurs, en alliant stabilité, sécurité et efficacité.</p>
+                    <ul class="card-list">
+                        <li>Administration Linux (Debian, Ubuntu, CentOS) et Windows Server 2022 - <em>Consultez mes réalisations pour découvrir mes déploiements concrets</em></li>
+                        <li>Gestion des utilisateurs, permissions et groupes (sudoers, Active Directory, GPO) - <em>Voir mes projets d'infrastructure pour les applications pratiques</em></li>
+                        <li>Services essentiels : DHCP, DNS, FTP, SSH, Apache/Nginx - <em>Découvrez mes configurations dans mes projets techniques</em></li>
+                        <li>Automatisation par scripts Bash et PowerShell - <em>Explorez mes réalisations pour voir l'automatisation en action</em></li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Linux</span>
+                        <span class="tech-tag">Windows Server</span>
+                        <span class="tech-tag">Active Directory</span>
+                        <span class="tech-tag">Bash</span>
+                        <span class="tech-tag">PowerShell</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Réseaux & Virtualisation -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h2 class="card-title">Réseaux & Virtualisation</h2>
+                </div>
+                <div class="card-content">
+                    <p>Passionnée par l'architecture réseau et la création d'environnements isolés, je conçois et configure des solutions virtuelles et physiques pour répondre aux besoins techniques.</p>
+                    <ul class="card-list">
+                        <li>Configuration réseau : VLAN, routage, mise en domaine avec Cisco Packet Tracer - <em>Consultez mes projets pour voir mes architectures réseau</em></li>
+                        <li>Virtualisation avec VMware & VirtualBox (déploiement multi-VM, snapshots, laboratoires) - <em>Découvrez mes environnements virtualisés dans mes réalisations</em></li>
+                        <li>Supervision et diagnostic avec Zabbix et Wireshark - <em>Voir mes projets de monitoring pour les applications concrètes</em></li>
+                        <li>Sécurisation des accès et segmentation réseau - <em>Explorez mes projets de sécurité pour les implémentations pratiques</em></li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Cisco</span>
+                        <span class="tech-tag">VMware</span>
+                        <span class="tech-tag">VirtualBox</span>
+                        <span class="tech-tag">Zabbix</span>
+                        <span class="tech-tag">Wireshark</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cybersécurité & Sécurité Systèmes -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="card-title">Cybersécurité & Sécurité Systèmes</h2>
+                </div>
+                <div class="card-content">
+                    <p>La cybersécurité est un pilier central de ma formation et de mes ambitions. J'intègre des pratiques de sécurité dans chaque projet afin de garantir la protection des systèmes et des données.</p>
+                    <ul class="card-list">
+                        <li>Durcissement des systèmes Linux et Windows - <em>Consultez mes projets pour voir mes configurations sécurisées</em></li>
+                        <li>Analyse et reconnaissance de vulnérabilités (Nmap, Metasploit, tests de pénétration de base) - <em>Découvrez mes audits de sécurité dans mes réalisations</em></li>
+                        <li>Sécurisation applicative : sessions protégées, hashing des mots de passe, politiques d'accès - <em>Voir mes projets web pour les implémentations de sécurité</em></li>
+                        <li>Stratégies de sauvegarde et restauration sur environnements virtualisés - <em>Explorez mes projets d'infrastructure pour les solutions de backup</em></li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">Metasploit</span>
+                        <span class="tech-tag">Firewall</span>
+                        <span class="tech-tag">Backup</span>
+                        <span class="tech-tag">Hardening</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Développement Web & Bases de Données -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h2 class="card-title">Développement Web & Bases de Données</h2>
+                </div>
+                <div class="card-content">
+                    <p>Maîtrise du développement web full-stack avec des technologies modernes et des pratiques de sécurité avancées. Conception et gestion de bases de données relationnelles pour des applications robustes et sécurisées.</p>
+                    <ul class="card-list">
+                        <li>Développement web : PHP, HTML/CSS, JavaScript, AJAX - <em>Consultez mes projets pour voir mes applications web sécurisées</em></li>
+                        <li>Bases de données : MySQL, requêtes complexes, optimisation - <em>Découvrez mes architectures de données dans mes réalisations</em></li>
+                        <li>Sécurité applicative : authentification, sessions, protection contre les injections - <em>Voir mes projets web pour les implémentations de sécurité</em></li>
+                        <li>Interface utilisateur : design responsive, expérience utilisateur optimisée - <em>Explorez mes projets pour voir mes interfaces modernes</em></li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">AJAX</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mes Réalisations -->
+        <div class="full-width-section">
+            <h2 class="section-title">Mes Réalisations</h2>
+            <div class="section-content">
+                <div class="section-item" onclick="window.location.href='personal-projects.html'" style="cursor: pointer;">
+                    <h3 class="item-title">Projets Personnels</h3>
+                </div>
+                <div class="section-item" onclick="window.location.href='team-projects.html'" style="cursor: pointer;">
+                    <h3 class="item-title">Projets en Équipe BTS</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
