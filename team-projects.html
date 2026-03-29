@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets en Équipe BTS - Portfolio SISR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00d4ff;
+            --accent-dark: #0099cc;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: #333333;
+            --glass: rgba(0, 212, 255, 0.1);
+            --glow: rgba(0, 212, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, var(--glass) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--glass) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 25px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+
+        /* Projects Grid */
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-category {
+            margin-bottom: 80px;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: var(--glass);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .category-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--glass), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px var(--glow);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .project-features li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .project-features li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 15px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .project-link.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .project-link.secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Team Info */
+        .team-info {
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .team-info strong {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements" id="floating-elements"></div>
+    
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">
+                <i class="fas fa-users"></i>
+                Projets en Équipe BTS
+            </div>
+            <p class="header-subtitle">
+                Découvrez mes projets collaboratifs réalisés en équipe durant mon BTS SIO. 
+                Chaque projet reflète l'esprit d'équipe et la collaboration dans l'innovation technique.
+            </p>
+        </header>
+        
+        <!-- Projects Container -->
+        <div class="projects-container">
+            <!-- Gestion de Parc IT -->
+            <section class="project-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-toolbox"></i>
+                    </div>
+                    <h2 class="category-title">Gestion de Parc IT</h2>
+                    <p class="category-description">
+                        Solutions de gestion de parc informatique et de service management pour l'administration IT.
+                    </p>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3 class="project-title">Installation et Configuration GLPI</h3>
+                        </div>
+                        <div class="team-info">
+                            <strong>Équipe :</strong> 4 étudiants (Annaelle Mpassi, Rahis Madimean, Merveil Mamno, Perine Cheteu) | <strong>Durée :</strong> 96 heures (4 jours) | <strong>Rôle :</strong> Administrateur système et base de données
+                        </div>
+                        <p class="project-description">
+                            Déploiement complet d'une solution GLPI (Gestionnaire Libre de Parc Informatique) sur serveur Debian 12.5. 
+                            Installation et configuration de l'infrastructure serveur web complète avec Apache2, PHP et MariaDB. 
+                            Mise en place de phpMyAdmin pour la gestion de la base de données et sécurisation de la plateforme.
+                        </p>
+                        <ul class="project-features">
+                            <li>Installation et configuration de Debian 12.5 (Bookworm)</li>
+                            <li>Mise en place de l'environnement LAMP (Apache2, PHP 8.2, MariaDB)</li>
+                            <li>Installation de GLPI version 10.0.14</li>
+                            <li>Configuration et sécurisation de la base de données MariaDB</li>
+                            <li>Installation de phpMyAdmin pour la gestion de la base de données</li>
+                            <li>Sécurisation du système (suppression install.php, configuration PHP sécurisée)</li>
+                            <li>Configuration des permissions et des dossiers de données</li>
+                            <li>Mise en place de l'interface web et configuration initiale</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">GLPI</span>
+                            <span class="tech-tag">Debian 12</span>
+                            <span class="tech-tag">Apache2</span>
+                            <span class="tech-tag">PHP 8.2</span>
+                            <span class="tech-tag">MariaDB</span>
+                            <span class="tech-tag">phpMyAdmin</span>
+                            <span class="tech-tag">Linux</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projets/Projets en equipe/GLPI.pdf" target="_blank" class="project-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Voir le document
+                            </a>
+                            <a href="Projets/Projets en equipe/GLPI.pdf" download class="project-link secondary">
+                                <i class="fas fa-download"></i>
+                                Télécharger
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h3 class="project-title">Gestion des GPO RedTech</h3>
+                        </div>
+                        <div class="team-info">
+                            <strong>Équipe :</strong> Projet en équipe | <strong>Rôle :</strong> Administration Windows Server
+                        </div>
+                        <p class="project-description">
+                            Projet de gestion et configuration des stratégies de groupe (GPO) dans un environnement Windows Server. 
+                            Mise en place de politiques de sécurité et de configuration pour la gestion centralisée des postes clients.
+                        </p>
+                        <ul class="project-features">
+                            <li>Configuration des Group Policy Objects (GPO)</li>
+                            <li>Gestion centralisée des politiques de sécurité</li>
+                            <li>Configuration des restrictions et permissions</li>
+                            <li>Déploiement des politiques sur les postes clients</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Windows Server</span>
+                            <span class="tech-tag">GPO</span>
+                            <span class="tech-tag">Active Directory</span>
+                            <span class="tech-tag">Group Policy</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projets/Projets en equipe/Gestion_GPO_RedTech.docx" target="_blank" class="project-link">
+                                <i class="fas fa-file-word"></i>
+                                Voir le document
+                            </a>
+                            <a href="Projets/Projets en equipe/Gestion_GPO_RedTech.docx" download class="project-link secondary">
+                                <i class="fas fa-download"></i>
+                                Télécharger
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Développement Web -->
+            <section class="project-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2 class="category-title">Développement Web</h2>
+                    <p class="category-description">
+                        Applications web full-stack développées en équipe avec des technologies modernes et des pratiques de sécurité avancées.
+                    </p>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h3 class="project-title">Dev Girls - Plateforme de Petites Annonces (Leboncoin)</h3>
+                        </div>
+                        <div class="team-info">
+                            <strong>Équipe :</strong> Annaelle MPASSI, Gabrielle KEMGUAN, Merveille | <strong>Rôle :</strong> Développement full-stack
+                        </div>
+                        <p class="project-description">
+                            Développement d'une plateforme web de petites annonces inspirée de Leboncoin, permettant aux utilisateurs 
+                            de publier, consulter et gérer des annonces de téléphones. Application complète avec authentification sécurisée, 
+                            système de messagerie, gestion de compte utilisateur et fonctionnalités CRUD complètes.
+                        </p>
+                        <ul class="project-features">
+                            <li>Système d'inscription et de connexion sécurisé avec hashage des mots de passe</li>
+                            <li>Gestion complète des annonces (création, modification, suppression, affichage)</li>
+                            <li>Système de filtrage avancé (par marque, prix min/max)</li>
+                            <li>Recherche textuelle dans les annonces</li>
+                            <li>Système de messagerie entre utilisateurs</li>
+                            <li>Upload et gestion d'images pour les annonces</li>
+                            <li>Gestion de profil utilisateur et mon compte</li>
+                            <li>Interface responsive avec design moderne</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Sessions</span>
+                            <span class="tech-tag">Upload de fichiers</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="dev girls/Leboncoin/connexion.php" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                            <a href="dev girls" class="project-link secondary">
+                                <i class="fas fa-folder"></i>
+                                Dossier du projet
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const elementCount = 15;
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 20 + 's';
+                element.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(element);
+            }
+        }
+
+        // Initialize floating elements
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingElements();
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            
+            parallax.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
