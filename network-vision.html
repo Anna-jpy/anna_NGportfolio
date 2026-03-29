@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Vision - Portfolio SISR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00d4ff;
+            --accent-dark: #0099cc;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: #333333;
+            --glass: rgba(0, 212, 255, 0.1);
+            --glow: rgba(0, 212, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, var(--glow) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, var(--glow) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, var(--glow) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            backdrop-filter: blur(20px);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--glow);
+        }
+
+        .header-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* Content Cards inspirées de Digital Identity */
+        .content-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            backdrop-filter: blur(30px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardReveal 0.8s ease forwards;
+        }
+
+        .content-card:nth-child(1) { animation-delay: 0.1s; }
+        .content-card:nth-child(2) { animation-delay: 0.2s; }
+        .content-card:nth-child(3) { animation-delay: 0.3s; }
+        .content-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Effet de lumière */
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 212, 255, 0.12) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-card.active::before {
+            opacity: 1;
+        }
+
+        /* Bordure lumineuse */
+        .content-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark), var(--accent));
+            border-radius: 24px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        .content-card.active::after {
+            opacity: 0.7;
+        }
+
+        /* Bouton fermer */
+        .card-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .content-card.active .card-close {
+            display: flex;
+        }
+
+        .card-close:hover {
+            background: rgba(255, 0, 0, 0.18);
+            border-color: #ff4444;
+            color: #ff8888;
+            transform: rotate(90deg);
+        }
+
+        /* Blur des autres cartes quand une est active */
+        .main-grid.has-active .content-card:not(.active) {
+            opacity: 0.35;
+            filter: blur(5px);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.28);
+        }
+
+        /* État actif (modale centrée) */
+        .content-card.active {
+            position: fixed;
+            inset: 0;
+            margin: auto;
+            transform: scale(1.02);
+            transform-origin: center center;
+            z-index: 1000;
+            width: min(90vw, 640px);
+            max-height: 90vh;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.72),
+                        0 0 0 900px rgba(0, 0, 0, 0.72),
+                        0 0 0 1px rgba(0, 212, 255, 0.24);
+            background: rgba(10, 10, 10, 0.94);
+            backdrop-filter: blur(32px);
+            padding: 46px;
+            cursor: default;
+        }
+
+        .content-card.active::-webkit-scrollbar {
+            display: none;
+        }
+
+        .content-card.active:hover {
+            transform: scale(1.04);
+        }
+
+        /* Header */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #0a3d52, #0f5a73);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--primary);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.28);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .content-card.active .card-icon {
+            transform: rotate(4deg) scale(1.05);
+            box-shadow: 0 12px 28px rgba(0, 212, 255, 0.36);
+        }
+
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #eef2f5, #d9e1e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+            letter-spacing: -0.5px;
+        }
+
+        .content-card.active .card-title {
+            background: linear-gradient(135deg, #f7f9fb, #e3e9ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contenu */
+        .card-content {
+            color: #d6dce3;
+            line-height: 1.75;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                        transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-top: 0;
+            position: relative;
+            z-index: 2;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .content-card.active .card-content {
+            opacity: 1;
+            transform: translateY(0);
+            margin-top: 26px;
+            height: auto;
+            overflow: visible;
+        }
+
+        .card-list {
+            list-style: none;
+            margin-top: 18px;
+            padding: 0;
+        }
+
+        .card-list li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 26px;
+            color: #d6dce3;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .content-card.active .card-list li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .content-card.active .card-list li:nth-child(1) { transition-delay: 0.05s; }
+        .content-card.active .card-list li:nth-child(2) { transition-delay: 0.1s; }
+        .content-card.active .card-list li:nth-child(3) { transition-delay: 0.15s; }
+        .content-card.active .card-list li:nth-child(4) { transition-delay: 0.2s; }
+
+        .card-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #9bb3c4;
+            font-size: 1.05rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-list li:hover {
+            color: #e6ebf1;
+            padding-left: 30px;
+        }
+
+        .card-list li:hover::before {
+            transform: translateX(5px);
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .content-card.active .tech-tags {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.25s;
+        }
+
+        .tech-tag {
+            background: rgba(155, 179, 196, 0.08);
+            border: 1px solid rgba(155, 179, 196, 0.2);
+            border-radius: 12px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            color: #e4eaef;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(155, 179, 196, 0.16);
+            border-color: rgba(155, 179, 196, 0.32);
+            transform: translateY(-2px);
+        }
+
+        /* Actions PDF */
+        .doc-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .doc-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 153, 204, 0.15));
+            color: #e7f0f5;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .doc-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 212, 255, 0.22);
+            border-color: rgba(0, 212, 255, 0.45);
+        }
+
+        .doc-button.secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #dfe6ed;
+        }
+
+        .doc-button i {
+            font-size: 1rem;
+        }
+
+        /* Full Width Section */
+        .full-width-section {
+            background: var(--glass);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .full-width-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: scan 3s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .section-item {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .section-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 15%; left: 5%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 35%; left: 20%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { top: 55%; left: 8%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { top: 75%; left: 25%; animation-delay: 0.5s; }
+        .floating-element:nth-child(5) { top: 25%; right: 15%; animation-delay: 1.5s; }
+        .floating-element:nth-child(6) { top: 65%; right: 5%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .content-card {
+                padding: 30px;
+            }
+
+            .full-width-section {
+                padding: 30px;
+            }
+
+            .section-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 40px 0 30px;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .full-width-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">
+                <i class="fas fa-eye"></i>
+                Network Vision
+            </div>
+            <h1 class="header-title">Ma Vision Technologique</h1>
+            <p class="header-subtitle">
+                Découvrez mes objectifs professionnels, ma veille technologique et ma vision 
+                stratégique pour l'évolution des technologies réseau et cybersécurité.
+            </p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- Veille Technologique -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-rss"></i>
+                    </div>
+                    <h2 class="card-title">Veille technologique</h2>
+                </div>
+                <div class="card-content">
+                    <p>Suivi régulier des tendances pour anticiper les évolutions réseau et sécurité.</p>
+                    <ul class="card-list">
+                        <li>Sources : blogs sécu, RFC/IETF, Cisco PSIRT, Microsoft MSRC</li>
+                        <li>Alertes : CVE critiques, Zero-day, bulletins CERT-FR</li>
+                        <li>Thèmes : IA appliquée à la détection, SASE/ZTNA, Cloud native</li>
+                        <li>Pratique : lab perso (VMware/Proxmox), tests d'outils récents</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">CVE</span>
+                        <span class="tech-tag">CERT-FR</span>
+                        <span class="tech-tag">ZTNA</span>
+                        <span class="tech-tag">SASE</span>
+                        <span class="tech-tag">Lab</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau de compétences -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <h2 class="card-title">Tableau de compétences</h2>
+                </div>
+                <div class="card-content">
+                    <div style="overflow-x:auto">
+                        <table style="width:100%; border-collapse:collapse; color:var(--text-muted); font-size:0.95rem;">
+                            <thead>
+                                <tr style="text-align:left; color:var(--text);">
+                                    <th style="padding:10px 8px;">Domaine</th>
+                                    <th style="padding:10px 8px;">Compétences clés</th>
+                                    <th style="padding:10px 8px;">Niveau</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:10px 8px;">Réseau</td>
+                                    <td style="padding:10px 8px;">VLAN, routage, ACL, VPN</td>
+                                    <td style="padding:10px 8px;">Intermédiaire +</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 8px;">Systèmes</td>
+                                    <td style="padding:10px 8px;">Linux/Windows, services AD/DNS/DHCP</td>
+                                    <td style="padding:10px 8px;">Intermédiaire</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 8px;">Sécurité</td>
+                                    <td style="padding:10px 8px;">Hardening, firewall, supervision, sauvegardes</td>
+                                    <td style="padding:10px 8px;">Intermédiaire</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 8px;">Virtualisation / Cloud</td>
+                                    <td style="padding:10px 8px;">VMware/Proxmox, bases Docker</td>
+                                    <td style="padding:10px 8px;">En progression</t
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-actions">
+                        <a class="doc-button" href="pdf/competences-synthese.pdf" target="_blank" title="Voir la synthèse des compétences">
+                            <i class="fas fa-file-pdf"></i> Voir la synthèse
+                        </a>
+                        <a class="doc-button secondary" href="pdf/competences-synthese.pdf" download title="Télécharger la synthèse">
+                            <i class="fas fa-download"></i> Télécharger
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conventions de stages -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h2 class="card-title">Conventions de stages</h2>
+                </div>
+                <div class="card-content">
+                    <p>Documents de stage par année :</p>
+                    <ul class="card-list">
+                        <li>1ère année : convention + missions (lien à ajouter)</li>
+                        <li>2ème année : convention + missions (lien à ajouter)</li>
+                    </ul>
+                    <div class="doc-actions">
+                        <a class="doc-button" href="pdf/convention-stage-1A.pdf" target="_blank" title="Voir convention 1ère année">
+                            <i class="fas fa-file-pdf"></i> Convention 1A
+                        </a>
+                        <a class="doc-button secondary" href="pdf/convention-stage-1A.pdf" download title="Télécharger convention 1ère année">
+                            <i class="fas fa-download"></i> Télécharger 1A
+                        </a>
+                        <a class="doc-button" href="pdf/convention-stage-2A.pdf" target="_blank" title="Voir convention 2ème année">
+                            <i class="fas fa-file-pdf"></i> Convention 2A
+                        </a>
+                        <a class="doc-button secondary" href="pdf/convention-stage-2A.pdf" download title="Télécharger convention 2ème année">
+                            <i class="fas fa-download"></i> Télécharger 2A
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projets BTS -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-diagram-project"></i>
+                    </div>
+                    <h2 class="card-title">Projets BTS</h2>
+                </div>
+                <div class="card-content">
+                    <p>Les deux projets présentés au BTS :</p>
+                    <ul class="card-list">
+                        <li>Projet 1 : titre + courte description (à compléter)</li>
+                        <li>Projet 2 : titre + courte description (à compléter)</li>
+                    </ul>
+                    <div class="doc-actions">
+                        <a class="doc-button" href="pdf/projet-bts-1.pdf" target="_blank" title="Voir dossier projet 1">
+                            <i class="fas fa-file-pdf"></i> Dossier Projet 1
+                        </a>
+                        <a class="doc-button secondary" href="pdf/projet-bts-1.pdf" download title="Télécharger projet 1">
+                            <i class="fas fa-download"></i> Télécharger P1
+                        </a>
+                        <a class="doc-button" href="pdf/projet-bts-2.pdf" target="_blank" title="Voir dossier projet 2">
+                            <i class="fas fa-file-pdf"></i> Dossier Projet 2
+                        </a>
+                        <a class="doc-button secondary" href="pdf/projet-bts-2.pdf" download title="Télécharger projet 2">
+                            <i class="fas fa-download"></i> Télécharger P2
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.content-card');
+            const grid = document.querySelector('.main-grid');
+            let activeCard = null;
+
+            cards.forEach(card => {
+                // bouton fermer
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'card-close';
+                closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                closeBtn.setAttribute('aria-label', 'Fermer');
+                card.appendChild(closeBtn);
+
+                // effet suivi souris
+                card.addEventListener('mousemove', (e) => {
+                    if (!card.classList.contains('active')) {
+                        const rect = card.getBoundingClientRect();
+                        const x = ((e.clientX - rect.left) / rect.width) * 100;
+                        const y = ((e.clientY - rect.top) / rect.height) * 100;
+                        card.style.setProperty('--mouse-x', x + '%');
+                        card.style.setProperty('--mouse-y', y + '%');
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (!card.classList.contains('active')) {
+                        card.style.setProperty('--mouse-x', '50%');
+                        card.style.setProperty('--mouse-y', '50%');
+                    }
+                });
+
+                // ouvrir / fermer sur clic
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.card-close')) return;
+                    if (card === activeCard) {
+                        closeCard(card);
+                    } else {
+                        if (activeCard) closeCard(activeCard);
+                        openCard(card);
+                    }
+                });
+
+                // fermer via bouton
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeCard(card);
+                });
+            });
+
+            function openCard(card) {
+                const cardContent = card.querySelector('.card-content');
+                cardContent.style.height = 'auto';
+                cardContent.style.overflow = 'visible';
+                card.style.transition = 'none';
+                activeCard = card;
+                card.classList.add('active');
+                grid.classList.add('has-active');
+                document.body.style.overflow = 'hidden';
+
+                setTimeout(() => {
+                    card.style.transition = '';
+                    requestAnimationFrame(() => {
+                        cardContent.style.opacity = '1';
+                        cardContent.style.transform = 'translateY(0)';
+                    });
+                }, 10);
+            }
+
+            function closeCard(card) {
+                const cardContent = card.querySelector('.card-content');
+                cardContent.style.opacity = '0';
+                cardContent.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    card.classList.remove('active');
+                    activeCard = null;
+                    grid.classList.remove('has-active');
+                    document.body.style.overflow = '';
+
+                    card.style.transition = '';
+                    cardContent.style.height = '';
+                    cardContent.style.overflow = '';
+                    cardContent.style.opacity = '';
+                    cardContent.style.transform = '';
+                }, 500);
+            }
+
+            // fermer en cliquant en dehors
+            document.addEventListener('click', (e) => {
+                if (activeCard && !activeCard.contains(e.target) && !e.target.closest('.content-card')) {
+                    closeCard(activeCard);
+                }
+            });
+
+            // fermer via Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && activeCard) {
+                    closeCard(activeCard);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
