@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets Personnels - Portfolio SISR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00d4ff;
+            --accent-dark: #0099cc;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: #333333;
+            --glass: rgba(0, 212, 255, 0.1);
+            --glow: rgba(0, 212, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, var(--glass) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--glass) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 25px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+
+        /* Projects Grid */
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-category {
+            margin-bottom: 80px;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: var(--glass);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .category-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--glass), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px var(--glow);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .project-features li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .project-features li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            border-radius: 15px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .project-link.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .project-link.secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements" id="floating-elements"></div>
+    
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">
+                <i class="fas fa-code"></i>
+                Projets Personnels
+            </div>
+            <p class="header-subtitle">
+                Découvrez mes projets personnels organisés par domaine technique. 
+                Chaque réalisation reflète ma passion pour l'innovation et l'excellence technique.
+            </p>
+        </header>
+        
+        <!-- Projects Container -->
+        <div class="projects-container">
+            <!-- Sécurité & Réseaux -->
+            <section class="project-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h2 class="category-title">Sécurité & Réseaux</h2>
+                    <p class="category-description">
+                        Projets de sécurité réseau et tests de pénétration pour renforcer la protection des infrastructures.
+                    </p>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3 class="project-title">Infrastructure Réseau Segmentée avec VLAN, ACL et DMZ</h3>
+                        </div>
+                        <p class="project-description">
+                            Mise en place d'une infrastructure réseau segmentée en plusieurs VLANs pour organiser 
+                            et sécuriser les différents services de l'entreprise. Configuration du routage inter-VLAN 
+                            via un routeur Cisco, application d'ACL pour contrôler les flux entre réseaux, et intégration 
+                            d'une DMZ pour héberger un service HTTPS.
+                        </p>
+                        <ul class="project-features">
+                            <li>Segmentation réseau avec 5 VLANs (Admin, Principal, Invité, Divers, DMZ)</li>
+                            <li>Configuration d'un routeur Cisco 1841 avec sous-interfaces 802.1Q</li>
+                            <li>Mise en place d'ACL pour contrôler les flux inter-VLAN</li>
+                            <li>Gestion des niveaux d'habilitation (logique admin vs autres VLANs)</li>
+                            <li>Configuration de switches d'accès et switch cœur</li>
+                            <li>Tests de connectivité et validation du filtrage</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Cisco</span>
+                            <span class="tech-tag">Packet Tracer</span>
+                            <span class="tech-tag">VLAN</span>
+                            <span class="tech-tag">ACL</span>
+                            <span class="tech-tag">Routage</span>
+                            <span class="tech-tag">DMZ</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projets/Projet en solo/Projet réseau Vlans.pdf" target="_blank" class="project-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Voir le document
+                            </a>
+                            <a href="Projets/Projet en solo/Projet réseau Vlans.pdf" download class="project-link secondary">
+                                <i class="fas fa-download"></i>
+                                Télécharger
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="project-title">Rapport Nmap - Analyse de Sécurité Réseau</h3>
+                        </div>
+                        <p class="project-description">
+                            Réalisation d'un audit de sécurité réseau avec Nmap pour identifier les vulnérabilités, 
+                            analyser les ports ouverts et les services exposés sur un environnement de test. 
+                            Analyse approfondie des résultats et recommandations de sécurisation.
+                        </p>
+                        <ul class="project-features">
+                            <li>Scan de ports et identification des services actifs</li>
+                            <li>Détection des systèmes d'exploitation</li>
+                            <li>Analyse des versions de services et applications</li>
+                            <li>Identification des vulnérabilités potentielles</li>
+                            <li>Rapport détaillé avec recommandations de sécurisation</li>
+                            <li>Analyse des risques et des mesures correctives</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Nmap</span>
+                            <span class="tech-tag">Cybersécurité</span>
+                            <span class="tech-tag">Audit</span>
+                            <span class="tech-tag">Scan de ports</span>
+                            <span class="tech-tag">Sécurité réseau</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projets/Projet en solo/Rapport nmap.pdf" target="_blank" class="project-link">
+                                <i class="fas fa-file-pdf"></i>
+                                Voir le document
+                            </a>
+                            <a href="Projets/Projet en solo/Rapport nmap.pdf" download class="project-link secondary">
+                                <i class="fas fa-download"></i>
+                                Télécharger
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const elementCount = 15;
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 20 + 's';
+                element.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(element);
+            }
+        }
+
+        // Initialize floating elements
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingElements();
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            
+            parallax.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
