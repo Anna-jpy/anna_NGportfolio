@@ -124,9 +124,9 @@
         /* Architecture Circles Grid */
         .architecture-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 60px;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -226,6 +226,15 @@
         }
 
         .vision-circle:hover {
+            border-color: var(--accent);
+            box-shadow: 0 25px 50px var(--glow);
+        }
+
+        .e6-circle {
+            border-color: var(--accent);
+        }
+
+        .e6-circle:hover {
             border-color: var(--accent);
             box-shadow: 0 25px 50px var(--glow);
         }
@@ -424,7 +433,7 @@
                 <p class="hero-subtitle">Naviguer dans mon univers technique</p>
                 
                 <div class="architecture-grid">
-                    <div class="arch-circle identity-circle" onclick="window.location.href='digital_identity.html'">
+                    <div class="arch-circle identity-circle" onclick="window.location.href='digital-identity.html'">
                         <div class="arch-icon">
                             <i class="fas fa-user-astronaut"></i>
                         </div>
@@ -443,6 +452,13 @@
                             <i class="fas fa-satellite-dish"></i>
                         </div>
                         <h3 class="arch-title">Network Vision</h3>
+                    </div>
+                    
+                    <div class="arch-circle e6-circle" onclick="window.location.href='e6-epreuves.html'">
+                        <div class="arch-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3 class="arch-title">Épreuves E6</h3>
                     </div>
                 </div>
             </div>
