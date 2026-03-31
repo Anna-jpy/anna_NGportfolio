@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - IA et Cybersécurité</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --paper: #f8f5ef;
+            --paper-dark: #efe8dc;
+            --ink: #2d2a26;
+            --ink-soft: #5a554d;
+            --accent: #2c6e91;
+            --accent-soft: #d9e7ef;
+            --line: #d8d0c3;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --max-width: 980px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.15)),
+                var(--paper);
+            color: var(--ink);
+            line-height: 1.9;
+        }
+
+        .page {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 28px 18px 60px;
+        }
+
+        .book-shell {
+            background: linear-gradient(180deg, #fbf8f3, #f6f1e8);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-shell::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 72px;
+            width: 1px;
+            height: 100%;
+            background: rgba(120, 100, 80, 0.10);
+        }
+
+        .topbar {
+            padding: 18px 26px 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            padding: 34px 60px 26px 110px;
+            border-bottom: 1px solid var(--line);
+            position: relative;
+        }
+
+        .hero::after {
+            content: "✦";
+            position: absolute;
+            top: 34px;
+            right: 38px;
+            font-size: 1.2rem;
+            color: #b8a48a;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 7px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        .intro {
+            font-size: 1.02rem;
+            color: var(--ink-soft);
+            max-width: 760px;
+        }
+
+        .meta-line {
+            margin-top: 18px;
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+
+        .content {
+            padding: 10px 60px 50px 110px;
+        }
+
+        .chapter {
+            padding: 26px 0 22px;
+            border-bottom: 1px solid rgba(216, 208, 195, 0.7);
+            position: relative;
+        }
+
+        .chapter:last-child {
+            border-bottom: none;
+        }
+
+        .chapter h2 {
+            font-size: 1.55rem;
+            margin-bottom: 14px;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.35;
+        }
+
+        .chapter h2 i {
+            color: var(--accent);
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .chapter h3 {
+            font-size: 1.08rem;
+            margin: 18px 0 10px;
+            color: var(--accent);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chapter p {
+            margin-bottom: 14px;
+            font-size: 1rem;
+        }
+
+        .chapter strong {
+            color: var(--ink);
+        }
+
+        .chapter ul {
+            margin: 10px 0 14px 24px;
+        }
+
+        .chapter li {
+            margin-bottom: 8px;
+        }
+
+        .chapter blockquote {
+            margin: 18px 0;
+            padding: 14px 18px;
+            border-left: 4px solid var(--accent);
+            background: rgba(44, 110, 145, 0.06);
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+
+        .mini-illustration {
+            float: right;
+            width: 120px;
+            height: 120px;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 4px 0 12px 20px;
+            background:
+                radial-gradient(circle at 30% 30%, #ffffff, var(--paper-dark));
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .inline-note {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 0 2px;
+            background: rgba(44, 110, 145, 0.08);
+            color: var(--accent);
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+            margin-top: 8px;
+        }
+
+        .subsection {
+            padding: 10px 0;
+        }
+
+        .source-list {
+            margin-top: 12px;
+        }
+
+        .source-list li {
+            margin-bottom: 10px;
+        }
+
+        .closing {
+            margin-top: 18px;
+            padding-top: 12px;
+            font-style: italic;
+            color: var(--ink-soft);
+        }
+
+        .footer-note {
+            padding: 24px 60px 28px 110px;
+            border-top: 1px solid var(--line);
+            font-size: 0.9rem;
+            color: var(--ink-soft);
+        }
+
+        @media (max-width: 860px) {
+            .hero,
+            .content,
+            .footer-note {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .book-shell::before {
+                display: none;
+            }
+
+            .two-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .mini-illustration {
+                float: none;
+                margin: 0 0 18px 0;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .hero,
+            .content,
+            .footer-note {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .chapter h2 {
+                font-size: 1.25rem;
+            }
+
+            .mini-illustration {
+                width: 90px;
+                height: 90px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="book-shell">
+            <header class="hero">
+                <div class="badge">
+                    <i class="fas fa-book-open"></i>
+                    Veille technologique
+                </div>
+                <h1>L’impact de l’intelligence artificielle sur la cybersécurité</h1>
+                <p class="intro">
+                    Cette veille technologique a pour objectif d’analyser les transformations apportées par
+                    l’intelligence artificielle dans le domaine de la cybersécurité. Elle montre à la fois
+                    comment l’IA renforce les mécanismes de défense, comment elle peut être utilisée à des fins offensives,
+                    et pourquoi les systèmes d’IA eux-mêmes doivent être sécurisés.
+                </p>
+                <div class="meta-line">
+                    BTS SIO – Option SISR • Veille réalisée dans une logique d’analyse, de synthèse et d’ouverture professionnelle
+                </div>
+            </header>
+
+            <main class="content">
+                <section class="chapter">
+                    <div class="mini-illustration">
+                        <i class="fas fa-circle-info"></i>
+                    </div>
+                    <h2><i class="fas fa-feather-pointed"></i> Introduction</h2>
+                    <p>
+                        L’intelligence artificielle occupe aujourd’hui une place croissante dans les systèmes d’information.
+                        Dans le domaine de la cybersécurité, elle permet de traiter de grands volumes de données, d’identifier
+                        des comportements inhabituels et d’améliorer la rapidité de réaction face aux incidents.
+                    </p>
+                    <p>
+                        Toutefois, cette évolution s’accompagne aussi de nouveaux risques. Les cybercriminels peuvent tirer profit
+                        de l’IA pour rendre leurs attaques plus crédibles, plus rapides et parfois plus difficiles à détecter.
+                        De plus, les modèles d’IA et leurs données d’entraînement constituent eux-mêmes de nouvelles surfaces d’attaque.
+                    </p>
+                    <blockquote>
+                        L’IA transforme la cybersécurité selon une double logique : elle renforce les capacités de défense,
+                        mais elle accroît aussi les moyens offensifs des attaquants.
+                    </blockquote>
+                </section>
+
+                <section class="chapter">
+                    <h2><i class="fas fa-magnifying-glass"></i> Méthodologie de veille</h2>
+                    <p>
+                        Pour construire cette veille, j’ai adopté une démarche régulière et structurée. L’objectif n’était pas
+                        seulement de collecter des informations, mais surtout de sélectionner des contenus fiables, récents
+                        et pertinents pour le domaine SISR.
+                    </p>
+
+                    <div class="two-cols">
+                        <div class="subsection">
+                            <h3>Outils utilisés</h3>
+                            <ul>
+                                <li>Feedly pour centraliser les flux RSS</li>
+                                <li>Google Alerts pour recevoir des notifications ciblées</li>
+                                <li>Twitter / X pour suivre des comptes institutionnels et spécialisés</li>
+                                <li>Conférences et vidéos techniques</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h3>Organisation</h3>
+                            <ul>
+                                <li>Suivi hebdomadaire des nouvelles informations</li>
+                                <li>Classement par thématique</li>
+                                <li>Identification des tendances récurrentes</li>
+                                <li>Réalisation d’une synthèse mensuelle</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        Les principaux mots-clés suivis ont été :
+                        <span class="inline-note">IA</span>
+                        <span class="inline-note">cybersécurité</span>
+                        <span class="inline-note">phishing IA</span>
+                        <span class="inline-note">deepfake</span>
+                        <span class="inline-note">SOC</span>
+                        <span class="inline-note">SIEM</span>
+                        <span class="inline-note">EDR</span>.
+                    </p>
+                </section>
+
+                <section class="chapter">
+                    <div class="mini-illustration">
+                        <i class="fas fa-diagram-project"></i>
+                    </div>
+                    <h2><i class="fas fa-sitemap"></i> Les trois dimensions de l’IA en cybersécurité</h2>
+                    <p>
+                        Cette veille montre que l’IA peut être étudiée selon trois dimensions complémentaires.
+                    </p>
+
+                    <h3>1. L’IA défensive</h3>
+                    <p>
+                        Elle regroupe les usages de l’IA au service de la protection des systèmes d’information :
+                        analyse comportementale, détection d’anomalies, automatisation d’alertes et amélioration
+                        de la supervision.
+                    </p>
+
+                    <h3>2. L’IA offensive</h3>
+                    <p>
+                        Elle concerne l’utilisation de l’IA par des acteurs malveillants pour générer du phishing plus crédible,
+                        créer des deepfakes ou automatiser certaines tâches d’attaque.
+                    </p>
+
+                    <h3>3. La cybersécurité de l’IA</h3>
+                    <p>
+                        Cette dimension s’intéresse à la protection des modèles d’IA, des jeux de données,
+                        des pipelines de traitement et des mécanismes de décision automatisée.
+                    </p>
+                </section>
+
+                <section class="chapter">
+                    <h2><i class="fas fa-shield-halved"></i> L’IA comme outil défensif</h2>
+                    <p>
+                        L’intelligence artificielle apporte un véritable gain dans la détection et la réponse aux incidents.
+                        Elle est particulièrement utile dans les environnements où de grands volumes de journaux et d’événements
+                        doivent être analysés rapidement.
+                    </p>
+
+                    <ul>
+                        <li>Détection avancée des comportements anormaux</li>
+                        <li>Analyse des journaux d’événements à grande échelle</li>
+                        <li>Réduction du temps de réaction</li>
+                        <li>Aide à la priorisation des alertes</li>
+                        <li>Automatisation partielle des réponses dans les SOC</li>
+                    </ul>
+
+                    <p>
+                        Dans un contexte SISR, cela concerne particulièrement les outils de type
+                        <strong>SIEM</strong>, <strong>EDR</strong> et les plateformes de supervision.
+                        L’IA ne remplace pas l’analyste, mais elle lui permet de traiter plus efficacement les informations.
+                    </p>
+                </section>
+
+                <section class="chapter">
+                    <div class="mini-illustration">
+                        <i class="fas fa-triangle-exclamation"></i>
+                    </div>
+                    <h2><i class="fas fa-bug"></i> L’IA comme accélérateur des menaces</h2>
+                    <p>
+                        L’un des points majeurs de cette veille est que l’IA peut aussi être utilisée à des fins offensives.
+                        Elle permet d’automatiser certaines tâches, de produire des contenus trompeurs plus crédibles
+                        et de faciliter certaines campagnes malveillantes.
+                    </p>
+
+                    <ul>
+                        <li>Phishing automatisé et plus personnalisé</li>
+                        <li>Création de deepfakes pour l’usurpation ou la fraude</li>
+                        <li>Automatisation de certaines actions de reconnaissance</li>
+                        <li>Réduction de la barrière technique pour certains attaquants</li>
+                    </ul>
+
+                    <p>
+                        Cette évolution rend les attaques plus crédibles et parfois plus difficiles à identifier,
+                        ce qui impose une montée en vigilance des administrateurs et analystes.
+                    </p>
+                </section>
+
+                <section class="chapter">
+                    <h2><i class="fas fa-microchip"></i> La cybersécurité de l’IA</h2>
+                    <p>
+                        Les systèmes d’IA ne doivent pas être vus uniquement comme des outils : ils deviennent aussi
+                        des actifs sensibles à protéger. Ils peuvent être victimes de manipulations, d’altérations,
+                        d’attaques adversariales ou de compromissions ciblant les données d’entraînement.
+                    </p>
+
+                    <ul>
+                        <li>Protection des modèles contre les attaques adversariales</li>
+                        <li>Sécurisation des jeux de données</li>
+                        <li>Contrôle de l’intégrité des pipelines</li>
+                        <li>Maîtrise des biais et surveillance de la qualité des résultats</li>
+                    </ul>
+
+                    <p>
+                        Cette dimension est particulièrement importante car un système d’IA compromis peut produire
+                        des décisions erronées tout en donnant une illusion de fiabilité.
+                    </p>
+                </section>
+
+                <section class="chapter">
+                    <div class="mini-illustration">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <h2><i class="fas fa-gavel"></i> Encadrement réglementaire et gestion des risques</h2>
+                    <p>
+                        Le développement de l’IA s’accompagne d’un cadre réglementaire croissant, en particulier
+                        à l’échelle européenne avec l’<strong>EU AI Act</strong>. Ce cadre met en avant la robustesse,
+                        la traçabilité, la gestion des risques et la sécurité des systèmes d’IA.
+                    </p>
+
+                    <p>
+                        Pour les professionnels des infrastructures, cela implique :
+                    </p>
+
+                    <ul>
+                        <li>d’intégrer l’IA dans l’analyse de risques ;</li>
+                        <li>de documenter les mesures de sécurité ;</li>
+                        <li>de renforcer la traçabilité et la supervision ;</li>
+                        <li>d’anticiper les contraintes réglementaires futures.</li>
+                    </ul>
+                </section>
+
+                <section class="chapter">
+                    <h2><i class="fas fa-user-shield"></i> Impact pour un étudiant BTS SIO SISR</h2>
+                    <p>
+                        Cette veille montre que les compétences attendues dans les métiers SISR évoluent.
+                        Un administrateur systèmes et réseaux doit aujourd’hui être capable de comprendre
+                        les outils intégrant de l’IA, de savoir interpréter les alertes produites,
+                        et d’identifier les limites de l’automatisation.
+                    </p>
+
+                    <p>
+                        Les implications concrètes pour un profil SISR sont nombreuses :
+                    </p>
+
+                    <ul>
+                        <li>comprendre le fonctionnement des SIEM, EDR et SOC assistés par IA ;</li>
+                        <li>renforcer les pratiques de supervision et d’analyse des logs ;</li>
+                        <li>participer à la sécurisation des environnements contenant des briques d’IA ;</li>
+                        <li>mieux intégrer la gestion des vulnérabilités et le durcissement des systèmes.</li>
+                    </ul>
+                </section>
+
+                <section class="chapter">
+                    <div class="mini-illustration">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h2><i class="fas fa-pen-to-square"></i> Synthèse</h2>
+                    <p>
+                        L’intelligence artificielle transforme profondément la cybersécurité. Elle améliore
+                        les capacités de détection, de supervision et d’automatisation, mais elle renforce
+                        également certains types de menaces.
+                    </p>
+                    <p>
+                        Pour les professionnels SISR, cette évolution impose une double exigence :
+                        savoir exploiter les apports de l’IA dans les outils de sécurité,
+                        tout en restant capables d’en comprendre les limites, les risques et les impacts.
+                    </p>
+                    <p class="closing">
+                        Cette veille montre ainsi que l’IA ne change pas seulement les outils : elle transforme
+                        aussi les compétences attendues dans les métiers de l’administration systèmes et réseaux.
+                    </p>
+                </section>
+
+                <section class="chapter">
+                    <h2><i class="fas fa-book"></i> Sources utilisées</h2>
+                    <ul class="source-list">
+                        <li><strong>ANSSI</strong> – recommandations et publications sur l’IA et la cybersécurité</li>
+                        <li><strong>ENISA</strong> – analyses européennes sur les cybermenaces</li>
+                        <li><strong>NCSC</strong> – prospective sur l’impact de l’IA dans les attaques</li>
+                        <li><strong>EU AI Act</strong> – cadre réglementaire européen</li>
+                        <li><strong>InCyber / Witik</strong> – articles spécialisés sur l’IA et les SOC</li>
+                        <li><strong>BlackHat / Microsoft Security</strong> – conférences et contenus techniques</li>
+                    </ul>
+                </section>
+            </main>
+
+            <div class="footer-note">
+                Veille technologique réalisée dans le cadre du BTS SIO option SISR.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
