@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projets en Équipe BTS - Portfolio SISR</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -14,546 +15,840 @@
         }
 
         :root {
-            --primary: #0a0a0a;
-            --secondary: #1a1a1a;
-            --accent: #00d4ff;
-            --accent-dark: #0099cc;
-            --text: #ffffff;
-            --text-muted: #888888;
-            --border: #333333;
-            --glass: rgba(0, 212, 255, 0.1);
-            --glow: rgba(0, 212, 255, 0.3);
+            --bg: #0a0f1c;
+            --bg-soft: #111827;
+
+            --surface: rgba(255, 255, 255, 0.04);
+            --surface-strong: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.08);
+
+            --text: #e5e7eb;
+            --text-muted: #9ca3af;
+            --title: #ffffff;
+
+            --accent: #3b82f6;
+            --accent-2: #06b6d4;
+            --accent-3: #1e293b;
+
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.4);
+
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --max-width: 1260px;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--primary);
             color: var(--text);
-            overflow-x: hidden;
             min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(59,130,246,0.10), transparent 22%),
+                radial-gradient(circle at 88% 14%, rgba(6,182,212,0.10), transparent 24%),
+                radial-gradient(circle at 50% 90%, rgba(30,41,59,0.16), transparent 20%),
+                linear-gradient(150deg, #0a0f1c 0%, #0f172a 48%, #0b1220 100%);
             position: relative;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 20%, var(--glass) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, var(--glass) 0%, transparent 50%);
-            animation: bgPulse 8s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes bgPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Floating Elements */
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(59,130,246,0.12), transparent 25%),
+                radial-gradient(circle at 80% 20%, rgba(6,182,212,0.10), transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(30,41,59,0.12), transparent 25%);
+            z-index: 0;
             pointer-events: none;
-            z-index: 1;
         }
 
-        .floating-element {
+        .background-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .blur-orb {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent);
             border-radius: 50%;
-            opacity: 0.4;
-            animation: float 20s infinite linear;
+            filter: blur(95px);
+            opacity: 0.22;
+            animation: drift 16s ease-in-out infinite alternate;
         }
 
-        @keyframes float {
+        .blur-orb.one {
+            width: 320px;
+            height: 320px;
+            top: -70px;
+            left: -60px;
+            background: rgba(59,130,246,0.26);
+        }
+
+        .blur-orb.two {
+            width: 260px;
+            height: 260px;
+            top: 26%;
+            right: -70px;
+            background: rgba(6,182,212,0.20);
+            animation-delay: 2s;
+        }
+
+        .blur-orb.three {
+            width: 240px;
+            height: 240px;
+            bottom: -60px;
+            left: 22%;
+            background: rgba(30,41,59,0.30);
+            animation-delay: 4s;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+            to {
+                transform: translate(28px, -18px) scale(1.08);
+            }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+            background-size: 46px 46px;
+            mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+            opacity: 0.45;
+        }
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.14);
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
             0% {
                 transform: translateY(100vh) translateX(0);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.4;
+            15% {
+                opacity: 1;
             }
-            90% {
-                opacity: 0.4;
+            85% {
+                opacity: 1;
             }
             100% {
-                transform: translateY(-100px) translateX(50px);
+                transform: translateY(-10vh) translateX(26px);
                 opacity: 0;
             }
         }
 
-        /* Main Content */
-        .main-content {
+        .page {
             position: relative;
-            z-index: 2;
-            min-height: 100vh;
-            padding: 40px 20px;
+            z-index: 1;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 28px 20px 90px;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
+        .hero {
+            position: relative;
+            overflow: hidden;
             margin-bottom: 60px;
-            padding: 40px 0;
+            padding: 48px 40px;
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
+                rgba(255,255,255,0.03);
+            border: 1px solid rgba(59,130,246,0.2);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
         }
 
-        .header-badge {
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top right, rgba(59,130,246,0.10), transparent 25%),
+                linear-gradient(120deg, rgba(255,255,255,0.04), transparent 42%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--glass);
-            border: 1px solid var(--accent);
-            border-radius: 25px;
-            padding: 8px 20px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--accent);
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.10);
+            color: #dbeafe;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 18px;
         }
 
-        .header-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--accent), #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header-subtitle {
-            font-size: 1.2rem;
+        .hero-text {
+            max-width: 760px;
+            font-size: 0.95rem;
+            line-height: 1.7;
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
         }
 
-
-        /* Projects Grid */
-        .projects-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .hero-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
         }
 
-        .project-category {
-            margin-bottom: 80px;
-        }
-
-        .category-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .category-icon {
+        .hero-chip {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 80px;
-            height: 80px;
-            background: var(--glass);
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            color: var(--accent);
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.09);
+            color: #e0f2fe;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
-        .category-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text);
+        .section-block {
+            margin-bottom: 52px;
         }
 
-        .category-description {
-            font-size: 1.1rem;
+        .section-heading {
+            margin-bottom: 28px;
+            padding-left: 4px;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #93c5fd;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--title);
+        }
+
+        .section-description {
+            max-width: 760px;
             color: var(--text-muted);
-            max-width: 500px;
-            margin: 0 auto;
+            line-height: 1.75;
+            font-size: 0.95rem;
         }
 
-        .projects-grid {
+        .soft-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            margin: 22px 0 30px;
+        }
+
+        .projects-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-top: 40px;
         }
 
         .project-card {
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            border-radius: 28px;
             overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--glass), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .project-card:hover::before {
-            left: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px var(--glow);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255,255,255,0.12);
         }
 
-        .project-header {
+        .project-visual {
+            position: relative;
             display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 100%;
+            padding: 24px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            overflow: hidden;
         }
 
-        .project-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--glass);
-            border: 1px solid var(--accent);
-            border-radius: 10px;
+        .project-visual.alt {
+            background: linear-gradient(135deg, #0f172a, #06b6d4);
+        }
+
+        .project-visual.third {
+            background: linear-gradient(135deg, #1e293b, #0ea5e9);
+        }
+
+        .project-visual::before,
+        .project-visual::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.16);
+            filter: blur(10px);
+        }
+
+        .project-visual::before {
+            width: 140px;
+            height: 140px;
+            top: -20px;
+            right: -20px;
+        }
+
+        .project-visual::after {
+            width: 100px;
+            height: 100px;
+            bottom: 30px;
+            left: -20px;
+        }
+
+        .project-visual-icon {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            width: 68px;
+            height: 68px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: var(--accent);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: white;
+            font-size: 1.8rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .project-visual-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-visual-label {
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 8px;
+        }
+
+        .project-visual-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1.35;
+            color: white;
+            max-width: 190px;
+        }
+
+        .project-body {
+            padding: 28px;
         }
 
         .project-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: 800;
+            line-height: 1.4;
+            color: var(--title);
+            margin-bottom: 12px;
+        }
+
+        .team-info {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .team-info strong {
+            color: #dbeafe;
         }
 
         .project-description {
             color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.7;
+            margin-bottom: 22px;
+            font-size: 0.9rem;
+        }
+
+        .project-layout {
+            display: grid;
+            grid-template-columns: 1.18fr 0.82fr;
+            gap: 22px;
+            align-items: start;
         }
 
         .project-features {
             list-style: none;
-            margin-bottom: 20px;
+            display: grid;
+            gap: 10px;
         }
 
         .project-features li {
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            padding-left: 20px;
             position: relative;
+            padding-left: 24px;
+            line-height: 1.7;
+            color: var(--text);
+            font-size: 0.9rem;
         }
 
         .project-features li::before {
-            content: '▶';
+            content: "✦";
             position: absolute;
             left: 0;
-            color: var(--accent);
-            font-size: 0.8rem;
+            top: 0;
+            color: #60a5fa;
+            font-size: 0.9rem;
+        }
+
+        .project-side {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .side-heading {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 14px;
         }
 
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
         .tech-tag {
-            background: var(--glass);
-            border: 1px solid var(--accent);
-            border-radius: 15px;
-            padding: 4px 12px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.10);
+            font-size: 0.75rem;
+            color: #dbeafe;
+            font-weight: 700;
         }
 
         .project-links {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .project-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--accent);
-            color: var(--primary);
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: 0.28s ease;
         }
 
-        .project-link:hover {
-            background: var(--accent-dark);
+        .project-link.primary {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+        }
+
+        .project-link.primary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 14px 25px rgba(59,130,246,0.22);
         }
 
         .project-link.secondary {
             background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
+            color: #dbeafe;
+            border: 1px solid rgba(255,255,255,0.14);
         }
 
         .project-link.secondary:hover {
-            background: var(--accent);
-            color: var(--primary);
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
         }
 
-        /* Team Info */
-        .team-info {
-            background: var(--glass);
-            border: 1px solid var(--accent);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .team-info strong {
-            color: var(--accent);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2.5rem;
-            }
-            
-            .projects-grid {
+        @media (max-width: 1020px) {
+            .project-card {
                 grid-template-columns: 1fr;
+            }
+
+            .project-visual {
+                min-height: 200px;
+            }
+
+            .project-visual-title {
+                max-width: 100%;
+            }
+
+            .project-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                padding: 18px 16px 60px;
+            }
+
+            .hero {
+                padding: 30px 22px;
+                margin-bottom: 52px;
+            }
+
+            .project-body {
+                padding: 22px;
+            }
+
+            .project-title {
+                font-size: 1.1rem;
+            }
+
+            .project-visual {
+                padding: 22px;
+            }
+
+            .project-visual-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                top: 20px;
+                left: 20px;
+            }
+
+            .project-visual-title {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation"></div>
-    
-    <!-- Floating Elements -->
-    <div class="floating-elements" id="floating-elements"></div>
-    
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-badge">
+    <div class="background-layer">
+        <div class="blur-orb one"></div>
+        <div class="blur-orb two"></div>
+        <div class="blur-orb three"></div>
+    </div>
+
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-badge">
                 <i class="fas fa-users"></i>
                 Projets en Équipe BTS
             </div>
-            <p class="header-subtitle">
-                Découvrez mes projets collaboratifs réalisés en équipe durant mon BTS SIO. 
-                Chaque projet reflète l'esprit d'équipe et la collaboration dans l'innovation technique.
+
+            <p class="hero-text">
+                Cette page présente les projets collaboratifs réalisés durant mon BTS SIO.
+                Chaque réalisation met en valeur le travail en équipe, la répartition des rôles,
+                la mise en commun des compétences techniques et la capacité à construire
+                des solutions concrètes dans un cadre professionnalisant.
             </p>
-        </header>
-        
-        <!-- Projects Container -->
-        <div class="projects-container">
-            <!-- Gestion de Parc IT -->
-            <section class="project-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-toolbox"></i>
-                    </div>
-                    <h2 class="category-title">Gestion de Parc IT</h2>
-                    <p class="category-description">
-                        Solutions de gestion de parc informatique et de service management pour l'administration IT.
-                    </p>
-                </div>
-                
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">
-                                <i class="fas fa-server"></i>
-                            </div>
-                            <h3 class="project-title">Installation et Configuration GLPI</h3>
+
+            <div class="hero-footer">
+                <span class="hero-chip"><i class="fas fa-users"></i> Travail en équipe</span>
+                <span class="hero-chip"><i class="fas fa-server"></i> Administration</span>
+                <span class="hero-chip"><i class="fas fa-globe"></i> Développement web</span>
+                <span class="hero-chip"><i class="fas fa-file-lines"></i> Documentation</span>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-heading">
+                <div class="section-label">Domaine exploré</div>
+                <h2 class="section-title">Gestion de Parc IT</h2>
+                <p class="section-description">
+                    Solutions de gestion de parc informatique, administration système
+                    et service management appliqués à des besoins concrets d’organisation IT.
+                </p>
+            </div>
+
+            <div class="soft-divider"></div>
+
+            <div class="projects-list">
+                <article class="project-card">
+                    <div class="project-visual">
+                        <div class="project-visual-icon">
+                            <i class="fas fa-server"></i>
                         </div>
+
+                        <div class="project-visual-text">
+                            <div class="project-visual-label">Projet d’équipe</div>
+                            <div class="project-visual-title">Installation et configuration GLPI</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <h3 class="project-title">Installation et Configuration GLPI</h3>
+
                         <div class="team-info">
-                            <strong>Équipe :</strong> 4 étudiants (Annaelle Mpassi, Rahis Madimean, Merveil Mamno, Perine Cheteu) | <strong>Durée :</strong> 96 heures (4 jours) | <strong>Rôle :</strong> Administrateur système et base de données
+                            <strong>Équipe :</strong> 4 étudiants (Annaelle Mpassi, Rahis Madimean, Merveil Mamno, Perine Cheteu)
+                            <br>
+                            <strong>Durée :</strong> 96 heures (4 jours)
+                            <br>
+                            <strong>Rôle :</strong> Administrateur système et base de données
                         </div>
+
                         <p class="project-description">
-                            Déploiement complet d'une solution GLPI (Gestionnaire Libre de Parc Informatique) sur serveur Debian 12.5. 
-                            Installation et configuration de l'infrastructure serveur web complète avec Apache2, PHP et MariaDB. 
-                            Mise en place de phpMyAdmin pour la gestion de la base de données et sécurisation de la plateforme.
+                            Déploiement complet d'une solution GLPI sur serveur Debian 12.5.
+                            Installation et configuration d'une infrastructure serveur web avec Apache2,
+                            PHP et MariaDB, mise en place de phpMyAdmin pour la gestion de la base de données
+                            et sécurisation globale de la plateforme.
                         </p>
-                        <ul class="project-features">
-                            <li>Installation et configuration de Debian 12.5 (Bookworm)</li>
-                            <li>Mise en place de l'environnement LAMP (Apache2, PHP 8.2, MariaDB)</li>
-                            <li>Installation de GLPI version 10.0.14</li>
-                            <li>Configuration et sécurisation de la base de données MariaDB</li>
-                            <li>Installation de phpMyAdmin pour la gestion de la base de données</li>
-                            <li>Sécurisation du système (suppression install.php, configuration PHP sécurisée)</li>
-                            <li>Configuration des permissions et des dossiers de données</li>
-                            <li>Mise en place de l'interface web et configuration initiale</li>
-                        </ul>
-                        <div class="tech-stack">
-                            <span class="tech-tag">GLPI</span>
-                            <span class="tech-tag">Debian 12</span>
-                            <span class="tech-tag">Apache2</span>
-                            <span class="tech-tag">PHP 8.2</span>
-                            <span class="tech-tag">MariaDB</span>
-                            <span class="tech-tag">phpMyAdmin</span>
-                            <span class="tech-tag">Linux</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="GLPI.pdf" target="_blank" class="project-link">
-                                <i class="fas fa-file-pdf"></i>
-                                Voir le document
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">
-                                <i class="fas fa-cog"></i>
+
+                        <div class="project-layout">
+                            <ul class="project-features">
+                                <li>Installation et configuration de Debian 12.5 (Bookworm)</li>
+                                <li>Mise en place de l’environnement LAMP : Apache2, PHP 8.2, MariaDB</li>
+                                <li>Installation de GLPI version 10.0.14</li>
+                                <li>Configuration et sécurisation de la base de données MariaDB</li>
+                                <li>Installation de phpMyAdmin pour la gestion de la base de données</li>
+                                <li>Sécurisation du système avec suppression de install.php et réglages PHP</li>
+                                <li>Configuration des permissions et des dossiers de données</li>
+                                <li>Mise en place de l’interface web et configuration initiale</li>
+                            </ul>
+
+                            <div class="project-side">
+                                <div class="side-heading">Technologies utilisées</div>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">GLPI</span>
+                                    <span class="tech-tag">Debian 12</span>
+                                    <span class="tech-tag">Apache2</span>
+                                    <span class="tech-tag">PHP 8.2</span>
+                                    <span class="tech-tag">MariaDB</span>
+                                    <span class="tech-tag">phpMyAdmin</span>
+                                    <span class="tech-tag">Linux</span>
+                                </div>
+
+                                <div class="project-links">
+                                    <a href="Projets/Projets en equipe/GLPI.pdf" target="_blank" class="project-link primary">
+                                        <i class="fas fa-file-pdf"></i>
+                                        Voir le document
+                                    </a>
+                                    <a href="Projets/Projets en equipe/GLPI.pdf" download class="project-link secondary">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </a>
+                                </div>
                             </div>
-                            <h3 class="project-title">Gestion des GPO RedTech</h3>
                         </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-visual alt">
+                        <div class="project-visual-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+
+                        <div class="project-visual-text">
+                            <div class="project-visual-label">Projet d’équipe</div>
+                            <div class="project-visual-title">Gestion des GPO RedTech</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <h3 class="project-title">Gestion des GPO RedTech</h3>
+
                         <div class="team-info">
-                            <strong>Équipe :</strong> Projet en équipe | <strong>Rôle :</strong> Administration Windows Server
+                            <strong>Équipe :</strong> Projet en équipe
+                            <br>
+                            <strong>Rôle :</strong> Administration Windows Server
                         </div>
+
                         <p class="project-description">
-                            Projet de gestion et configuration des stratégies de groupe (GPO) dans un environnement Windows Server. 
-                            Mise en place de politiques de sécurité et de configuration pour la gestion centralisée des postes clients.
+                            Projet de gestion et de configuration des stratégies de groupe (GPO)
+                            dans un environnement Windows Server. L’objectif était de mettre en place
+                            des politiques centralisées de sécurité et de configuration pour les postes clients.
                         </p>
-                        <ul class="project-features">
-                            <li>Configuration des Group Policy Objects (GPO)</li>
-                            <li>Gestion centralisée des politiques de sécurité</li>
-                            <li>Configuration des restrictions et permissions</li>
-                            <li>Déploiement des politiques sur les postes clients</li>
-                        </ul>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Windows Server</span>
-                            <span class="tech-tag">GPO</span>
-                            <span class="tech-tag">Active Directory</span>
-                            <span class="tech-tag">Group Policy</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="Gestion_GPO_RedTech.docx" target="_blank" class="project-link">
-                                <i class="fas fa-file-word"></i>
-                                Voir le document
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Développement Web -->
-            <section class="project-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h2 class="category-title">Développement Web</h2>
-                    <p class="category-description">
-                        Applications web full-stack développées en équipe avec des technologies modernes et des pratiques de sécurité avancées.
-                    </p>
-                </div>
-                
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">
-                                <i class="fas fa-shopping-bag"></i>
+
+                        <div class="project-layout">
+                            <ul class="project-features">
+                                <li>Configuration des Group Policy Objects (GPO)</li>
+                                <li>Gestion centralisée des politiques de sécurité</li>
+                                <li>Configuration des restrictions et des permissions</li>
+                                <li>Déploiement des politiques sur les postes clients</li>
+                            </ul>
+
+                            <div class="project-side">
+                                <div class="side-heading">Technologies utilisées</div>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Windows Server</span>
+                                    <span class="tech-tag">GPO</span>
+                                    <span class="tech-tag">Active Directory</span>
+                                    <span class="tech-tag">Group Policy</span>
+                                </div>
+
+                                <div class="project-links">
+                                    <a href="Projets/Projets en equipe/Gestion_GPO_RedTech.docx" target="_blank" class="project-link primary">
+                                        <i class="fas fa-file-word"></i>
+                                        Voir le document
+                                    </a>
+                                    <a href="Projets/Projets en equipe/Gestion_GPO_RedTech.docx" download class="project-link secondary">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </a>
+                                </div>
                             </div>
-                            <h3 class="project-title">Dev Girls - Plateforme de Petites Annonces (Leboncoin)</h3>
-                        </div>
-                        <div class="team-info">
-                            <strong>Équipe :</strong> Annaelle MPASSI, Gabrielle KEMGUAN, Merveille | <strong>Rôle :</strong> Développement full-stack
-                        </div>
-                        <p class="project-description">
-                            Développement d'une plateforme web de petites annonces inspirée de Leboncoin, permettant aux utilisateurs 
-                            de publier, consulter et gérer des annonces de téléphones. Application complète avec authentification sécurisée, 
-                            système de messagerie, gestion de compte utilisateur et fonctionnalités CRUD complètes.
-                        </p>
-                        <ul class="project-features">
-                            <li>Système d'inscription et de connexion sécurisé avec hashage des mots de passe</li>
-                            <li>Gestion complète des annonces (création, modification, suppression, affichage)</li>
-                            <li>Système de filtrage avancé (par marque, prix min/max)</li>
-                            <li>Recherche textuelle dans les annonces</li>
-                            <li>Système de messagerie entre utilisateurs</li>
-                            <li>Upload et gestion d'images pour les annonces</li>
-                            <li>Gestion de profil utilisateur et mon compte</li>
-                            <li>Interface responsive avec design moderne</li>
-                        </ul>
-                        <div class="tech-stack">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">HTML/CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Sessions</span>
-                            <span class="tech-tag">Upload de fichiers</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="dev girls/Leboncoin/connexion.php" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                                Voir le projet
-                            </a>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-heading">
+                <div class="section-label">Domaine exploré</div>
+                <h2 class="section-title">Développement Web</h2>
+                <p class="section-description">
+                    Applications web full-stack développées en équipe avec une logique de collaboration,
+                    d’organisation des fonctionnalités et de mise en œuvre de solutions sécurisées.
+                </p>
+            </div>
+
+            <div class="soft-divider"></div>
+
+            <div class="projects-list">
+                <article class="project-card">
+                    <div class="project-visual third">
+                        <div class="project-visual-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+
+                        <div class="project-visual-text">
+                            <div class="project-visual-label">Projet web</div>
+                            <div class="project-visual-title">Plateforme de petites annonces</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <h3 class="project-title">Dev Girls - Plateforme de Petites Annonces (Leboncoin)</h3>
+
+                        <div class="team-info">
+                            <strong>Équipe :</strong> Annaelle MPASSI, Gabrielle KEMGUAN, Merveille
+                            <br>
+                            <strong>Rôle :</strong> Développement full-stack
+                        </div>
+
+                        <p class="project-description">
+                            Développement d'une plateforme web de petites annonces inspirée de Leboncoin,
+                            permettant aux utilisateurs de publier, consulter et gérer des annonces de téléphones.
+                            Le projet intègre une authentification sécurisée, une messagerie entre utilisateurs,
+                            la gestion des profils et les opérations CRUD complètes.
+                        </p>
+
+                        <div class="project-layout">
+                            <ul class="project-features">
+                                <li>Système d’inscription et de connexion sécurisé avec hashage des mots de passe</li>
+                                <li>Gestion complète des annonces : création, modification, suppression et affichage</li>
+                                <li>Système de filtrage avancé par marque et par prix</li>
+                                <li>Recherche textuelle dans les annonces</li>
+                                <li>Système de messagerie entre utilisateurs</li>
+                                <li>Upload et gestion d’images pour les annonces</li>
+                                <li>Gestion de profil utilisateur et espace “Mon compte”</li>
+                                <li>Interface responsive avec design moderne</li>
+                            </ul>
+
+                            <div class="project-side">
+                                <div class="side-heading">Technologies utilisées</div>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">PHP</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">HTML/CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">Sessions</span>
+                                    <span class="tech-tag">Upload de fichiers</span>
+                                </div>
+
+                                <div class="project-links">
+                                    <a href="dev girls/Leboncoin/connexion.php" target="_blank" class="project-link primary">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        Voir le projet
+                                    </a>
+                                    <a href="dev girls" class="project-link secondary">
+                                        <i class="fas fa-folder"></i>
+                                        Dossier du projet
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
 
     <script>
-        // Create floating elements
-        function createFloatingElements() {
-            const container = document.getElementById('floating-elements');
-            const elementCount = 15;
-            
-            for (let i = 0; i < elementCount; i++) {
-                const element = document.createElement('div');
-                element.className = 'floating-element';
-                element.style.left = Math.random() * 100 + '%';
-                element.style.animationDelay = Math.random() * 20 + 's';
-                element.style.animationDuration = (15 + Math.random() * 10) + 's';
-                container.appendChild(element);
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const count = 18;
+
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('span');
+                particle.className = 'particle';
+
+                const size = Math.random() * 4 + 3;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (12 + Math.random() * 10) + 's';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+
+                container.appendChild(particle);
             }
         }
 
-        // Initialize floating elements
-        document.addEventListener('DOMContentLoaded', () => {
-            createFloatingElements();
-        });
-
-        // Parallax effect for floating elements
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.floating-element');
-            
-            parallax.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
+        document.addEventListener('DOMContentLoaded', createParticles);
     </script>
 </body>
 </html>
