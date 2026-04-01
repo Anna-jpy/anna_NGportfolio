@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de compétences - Portfolio BTS SIO</title>
+    <style>
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 40px 0;
+            color: #222;
+        }
+
+        .document {
+            max-width: 1100px;
+            margin: auto;
+            background: #ffffff;
+            padding: 60px 70px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-top: 35px;
+            margin-bottom: 14px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
+            color: #1f2937;
+        }
+
+        p {
+            text-align: justify;
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+
+        .intro-box {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 28px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 22px;
+            margin-bottom: 24px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+            background: #ffffff;
+        }
+
+        thead {
+            background: #eff6ff;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 14px 12px;
+            text-align: left;
+            vertical-align: top;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        th {
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        td strong {
+            color: #111827;
+        }
+
+        .btn-group {
+            margin-top: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #4b5563;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.92;
+        }
+
+        .note {
+            margin-top: 18px;
+            padding: 14px 16px;
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .document {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document">
+    <h1>Tableau de compétences</h1>
+    <p class="subtitle">BTS SIO – Option SISR</p>
+
+    <div class="intro-box">
+        <p>
+            Cette page présente une synthèse de mes compétences et de mes réalisations dans le cadre
+            de mon BTS SIO. Elle met en évidence les principaux projets réalisés en formation ainsi
+            que les expériences acquises en milieu professionnel.
+        </p>
+        <p>
+            Le tableau ci-dessous permet d’avoir une vue claire et rapide de mon parcours. Le tableau
+            complet reste également consultable via le document original.
+        </p>
+    </div>
+
+    <h2>Synthèse des réalisations</h2>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Réalisation</th>
+                    <th>Période</th>
+                    <th>Domaine principal</th>
+                    <th>Compétences mobilisées</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Déploiement d’un environnement virtualisé avec Windows Server 2022</strong><br>
+                        Installation VMware, machines virtuelles, Active Directory, GPO, DHCP, DNS
+                    </td>
+                    <td>02/2025 – 03/2025</td>
+                    <td>Systèmes & Réseaux</td>
+                    <td>Administration serveur, domaine AD, virtualisation, services réseau</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Configuration VLAN + DHCP (Cisco Packet Tracer)</strong><br>
+                        VLAN, ports switch, inter-VLAN routing, DHCP
+                    </td>
+                    <td>02/2025 – 03/2025</td>
+                    <td>Réseaux</td>
+                    <td>Segmentation réseau, routage, configuration switch, adressage IP</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Mise en place d’un serveur Debian</strong><br>
+                        Apache, hébergement web, sauvegardes, gestion utilisateurs Linux
+                    </td>
+                    <td>03/2025</td>
+                    <td>Systèmes</td>
+                    <td>Linux, hébergement, sécurité, gestion des droits</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Projet site web de petites annonces (PHP / MySQL)</strong><br>
+                        Environnement LAMP, sessions sécurisées, protection SQL, messagerie AJAX
+                    </td>
+                    <td>04/2025 – 05/2025</td>
+                    <td>Développement</td>
+                    <td>PHP, MySQL, sécurité web, gestion de projet</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Mise en place d’un pare-feu et segmentation réseau avec pfSense</strong><br>
+                        WAN/LAN, règles firewall, NAT, tests de connectivité
+                    </td>
+                    <td>10/2025 – 12/2025</td>
+                    <td>Sécurité réseau</td>
+                    <td>Firewall, filtrage, sécurité des flux, architecture réseau</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Segmentation réseau + VoIP sous Cisco Packet Tracer</strong><br>
+                        VLAN, trunk, téléphones IP, DHCP, communication VoIP
+                    </td>
+                    <td>02/2026</td>
+                    <td>Réseaux / VoIP</td>
+                    <td>VLAN, VoIP, configuration switch, tests réseau</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Déploiement d’une solution OpenMaint sous Linux</strong><br>
+                        Installation serveur, base de données, rôles utilisateurs, sécurisation
+                    </td>
+                    <td>02/2026</td>
+                    <td>Systèmes</td>
+                    <td>Linux, déploiement de service, base de données, gestion des accès</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Veille technologique</strong><br>
+                        Étude de l’impact de l’intelligence artificielle sur la cybersécurité
+                    </td>
+                    <td>08/2025 – 01/2026</td>
+                    <td>Veille / Cybersécurité</td>
+                    <td>Recherche, analyse, synthèse, développement professionnel</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Stage 1ère année – Les Réparateurs Mac et PC</strong><br>
+                        Maintenance, diagnostic, dépannage, support N1, assistance utilisateur
+                    </td>
+                    <td>05/2025 – 07/2025</td>
+                    <td>Support informatique</td>
+                    <td>Maintenance postes, assistance utilisateurs, résolution d’incidents</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Stage 2ème année – Institut F2I</strong><br>
+                        Windows/Linux, Active Directory, DNS, DHCP, VMware, Hyper-V, supervision réseau
+                    </td>
+                    <td>12/2025 – 01/2026</td>
+                    <td>Systèmes & Réseaux</td>
+                    <td>Administration serveur, virtualisation, services réseau, sécurité</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="btn-group">
+        <a href="documents/tableau-competences.xlsx" target="_blank" class="btn btn-primary">Voir le tableau réel</a>
+        <a href="documents/tableau-competences.xlsx" download class="btn btn-secondary">Télécharger</a>
+    </div>
+
+    <div class="note">
+        Remplace simplement <strong>documents/tableau-competences.xlsx</strong> par le vrai nom ou le vrai chemin
+        de ton fichier Excel dans ton projet.
+    </div>
+
+    <div class="footer">
+        Portfolio BTS SIO – Tableau de compétences
+    </div>
+</div>
+
+</body>
+</html>
