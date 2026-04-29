@@ -167,6 +167,33 @@
             border-color: rgba(125, 223, 195, 0.25);
         }
 
+        .cv-box {
+            background:
+                linear-gradient(rgba(20, 23, 22, 0.92), rgba(20, 23, 22, 0.92)),
+                radial-gradient(circle at top right, rgba(125, 223, 195, 0.18), transparent 45%);
+            border-color: rgba(125, 223, 195, 0.25);
+        }
+
+        .cv-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            padding: 13px 22px;
+            background: var(--accent);
+            color: #06201a;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .cv-button:hover {
+            background: var(--accent-dark);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 18px var(--glow);
+        }
+
         footer {
             text-align: center;
             padding: 25px;
@@ -211,6 +238,11 @@
             .content-box {
                 padding: 24px;
             }
+
+            .cv-button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -252,24 +284,21 @@
                 <h2>À propos de moi</h2>
 
                 <p>
-                    Je m’appelle <strong>Annaelle Mpassi NG</strong> et je suis actuellement étudiante
+                    Je m’appelle <strong>Annaelle Mpassi Ngamissumou</strong> et je suis actuellement étudiante
                     en <strong>BTS Services Informatiques aux Organisations</strong>, option
                     <strong>Solutions d’Infrastructure, Systèmes et Réseaux</strong>.
                 </p>
-
                 <p>
                     Mon parcours m’a progressivement orientée vers le domaine des infrastructures informatiques.
                     À travers ma formation, mes travaux pratiques et mes expériences professionnelles,
                     je découvre comment installer, configurer, administrer et sécuriser un environnement informatique.
                 </p>
-
                 <p>
                     Je m’intéresse particulièrement aux systèmes Windows et Linux, aux services réseau
                     comme DHCP et DNS, à Active Directory, à la virtualisation ainsi qu’au support utilisateur.
                     Ces domaines me permettent de mieux comprendre le fonctionnement d’une infrastructure
                     et l’importance d’un service informatique fiable, organisé et sécurisé.
                 </p>
-
                 <p>
                     Aujourd’hui, je souhaite continuer à progresser en intégrant une alternance dans le domaine
                     de l’administration systèmes et réseaux, afin de renforcer mes compétences techniques
@@ -348,6 +377,21 @@
                     mes compétences techniques et de continuer à construire mon projet vers le métier
                     d’<strong>administratrice systèmes et réseaux</strong>.
                 </p>
+            </div>
+
+            <!-- CV -->
+            <div class="content-box cv-box">
+                <h2>Mon CV</h2>
+
+                <p>
+                    Vous pouvez consulter ou télécharger mon CV afin d’avoir une vue d’ensemble
+                    de mon parcours, de mes compétences et de mes expériences professionnelles.
+                </p>
+
+                <a href="documents/cv.pdf" target="_blank" class="cv-button">
+                    <i class="fas fa-file-arrow-down"></i>
+                    Télécharger mon CV
+                </a>
             </div>
 
         </div>
