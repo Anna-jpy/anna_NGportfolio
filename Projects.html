@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets - Annaelle Mpassi NG</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" 
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #070908;
+            --secondary: #141716;
+            --accent: #7ddfc3;
+            --accent-dark: #4fb99f;
+            --text: #ffffff;
+            --text-muted: #a8a8a8;
+            --border: #2f3a37;
+            --glass: rgba(125, 223, 195, 0.12);
+            --glow: rgba(125, 223, 195, 0.28);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #111816 0%, #080b0a 45%, #050505 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 8, 0.88);
+            border-bottom: 1px solid rgba(125, 223, 195, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* MAIN */
+        main {
+            min-height: calc(100vh - 86px);
+            padding: 75px 8%;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: auto;
+        }
+
+        .small-title {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            max-width: 900px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        /* INTRO BOX */
+        .content-box {
+            background: rgba(20, 23, 22, 0.82);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 22px;
+            padding: 34px;
+            margin-bottom: 32px;
+        }
+
+        .content-box h2 {
+            color: var(--accent);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .content-box p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 26px;
+        }
+
+        .project-card {
+            background: rgba(20, 23, 22, 0.82);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 22px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 170px;
+            height: 170px;
+            background: radial-gradient(circle, rgba(125, 223, 195, 0.13), transparent 65%);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(125, 223, 195, 0.45);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .project-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid rgba(125, 223, 195, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-icon i {
+            color: var(--accent);
+            font-size: 1.6rem;
+        }
+
+        .project-card h2 {
+            color: var(--text);
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            font-size: 0.98rem;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card ul {
+            padding-left: 20px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card li {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .main-project {
+            grid-column: span 2;
+            background:
+                linear-gradient(rgba(20, 23, 22, 0.92), rgba(20, 23, 22, 0.92)),
+                radial-gradient(circle at top left, rgba(125, 223, 195, 0.18), transparent 45%);
+            border-color: rgba(125, 223, 195, 0.25);
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .meta-item {
+            color: var(--accent);
+            background: rgba(125, 223, 195, 0.08);
+            border: 1px solid rgba(125, 223, 195, 0.22);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag {
+            color: var(--accent);
+            background: rgba(125, 223, 195, 0.08);
+            border: 1px solid rgba(125, 223, 195, 0.22);
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .skills-box {
+            margin-top: 16px;
+            padding: 18px;
+            background: rgba(125, 223, 195, 0.05);
+            border: 1px solid rgba(125, 223, 195, 0.14);
+            border-radius: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skills-box h3 {
+            margin-top: 0;
+        }
+
+        .skills-box ul {
+            margin-bottom: 0;
+        }
+
+        /* BOUTONS DOCUMENTATION */
+        .project-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .project-btn.primary {
+            background: var(--accent);
+            color: #06201a;
+        }
+
+        .project-btn.primary:hover {
+            background: var(--accent-dark);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 18px var(--glow);
+        }
+
+        .project-btn.secondary {
+            color: var(--accent);
+            border: 1px solid rgba(125, 223, 195, 0.35);
+            background: rgba(125, 223, 195, 0.06);
+        }
+
+        .project-btn.secondary:hover {
+            background: var(--glass);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            border-top: 1px solid rgba(125, 223, 195, 0.12);
+            background: rgba(7, 9, 8, 0.85);
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 1050px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-project {
+                grid-column: span 1;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            header {
+                padding: 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            main {
+                padding: 55px 20px 70px;
+            }
+
+            .content-box,
+            .project-card {
+                padding: 24px;
+            }
+
+            .project-actions,
+            .project-btn {
+                width: 100%;
+            }
+
+            .project-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">Annaelle NG</a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <li><a href="bts-sio.html">BTS SIO</a></li>
+            <li><a href="projets.html" class="active">Projets</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="e6.html">E6</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <p class="small-title">Réalisations</p>
+
+            <h1>Mes projets</h1>
+
+            <p class="intro">
+                Cette page présente les projets réalisés au cours de ma formation en BTS SIO option SISR.
+                Ils mettent en avant mes compétences en administration systèmes, réseaux, cybersécurité,
+                virtualisation, gestion de parc informatique et déploiement de services.
+            </p>
+
+            <!-- INTRODUCTION -->
+            <div class="content-box">
+                <h2>Présentation générale</h2>
+
+                <p>
+                    Les projets ci-dessous illustrent différentes situations professionnelles rencontrées
+                    dans le domaine de l’infrastructure informatique. Ils couvrent la configuration réseau,
+                    l’analyse de sécurité, l’installation d’applications professionnelles, la gestion de parc
+                    et l’administration d’un domaine Active Directory.
+                </p>
+
+                <p>
+                    Chaque projet suit une démarche technique : analyse du besoin, préparation de l’environnement,
+                    configuration, tests, validation et documentation.
+                </p>
+            </div>
+
+            <!-- PROJETS -->
+            <div class="projects-grid">
+
+                <!-- PROJET 1 -->
+                <article class="project-card main-project">
+                    <div class="project-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+
+                    <div class="project-meta">
+                        <span class="meta-item">Projet 1</span>
+                        <span class="meta-item">Réseau</span>
+                        <span class="meta-item">Projet individuel</span>
+                    </div>
+
+                    <h2>Infrastructure réseau segmentée avec VLAN, ACL et DMZ</h2>
+
+                    <p>
+                        Ce projet consiste à mettre en place une infrastructure réseau d’entreprise segmentée
+                        en plusieurs VLAN afin de séparer les services et de contrôler les communications.
+                        Le routage inter-VLAN est configuré via un routeur Cisco 1841 et des ACL sont utilisées
+                        pour filtrer les flux entre les réseaux.
+                    </p>
+
+                    <h3>Objectifs du projet</h3>
+                    <ul>
+                        <li>Segmenter le réseau en plusieurs VLAN : Administration, Principal, Invité, Divers et DMZ</li>
+                        <li>Configurer le routage inter-VLAN avec des sous-interfaces 802.1Q</li>
+                        <li>Mettre en place des ACL pour gérer les habilitations réseau</li>
+                        <li>Tester les communications autorisées et bloquées</li>
+                        <li>Ajouter une DMZ fonctionnelle avec un service HTTPS</li>
+                    </ul>
+
+                    <h3>Réalisation</h3>
+                    <p>
+                        L’architecture repose sur un routeur Cisco 1841, un switch cœur, plusieurs switchs d’accès,
+                        des postes clients, des serveurs internes et un serveur DMZ. Les VLAN utilisés sont :
+                        VLAN 10 Administration, VLAN 20 Principal, VLAN 30 Invité, VLAN 40 Divers et VLAN 50 DMZ.
+                    </p>
+
+                    <div class="skills-box">
+                        <h3>Compétences développées</h3>
+                        <ul>
+                            <li>Conception d’une architecture réseau segmentée</li>
+                            <li>Configuration de VLAN, trunks et ports access</li>
+                            <li>Routage inter-VLAN et sous-interfaces</li>
+                            <li>Filtrage réseau avec ACL</li>
+                            <li>Tests de connectivité et validation technique</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Cisco Packet Tracer</span>
+                        <span class="tag">Cisco 1841</span>
+                        <span class="tag">VLAN</span>
+                        <span class="tag">ACL</span>
+                        <span class="tag">DMZ</span>
+                        <span class="tag">HTTPS</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="documents/projet-reseau.pdf" target="_blank" class="project-btn primary">
+                            <i class="fas fa-file-pdf"></i>
+                            Voir la documentation
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJET 2 -->
+                <article class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-magnifying-glass-chart"></i>
+                    </div>
+
+                    <div class="project-meta">
+                        <span class="meta-item">Projet 2</span>
+                        <span class="meta-item">Cybersécurité</span>
+                    </div>
+
+                    <h2>Analyse de sécurité réseau avec Nmap</h2>
+
+                    <p>
+                        Ce projet consiste à réaliser une analyse de sécurité d’un réseau local à l’aide de Nmap.
+                        L’objectif est d’identifier les machines actives, les ports ouverts, les services exposés
+                        et les risques potentiels associés.
+                    </p>
+
+                    <h3>Objectifs du projet</h3>
+                    <ul>
+                        <li>Installer et utiliser Nmap depuis Windows</li>
+                        <li>Découvrir les hôtes actifs du réseau local</li>
+                        <li>Scanner une machine en détail</li>
+                        <li>Identifier les ports ouverts et les services exposés</li>
+                        <li>Proposer des recommandations de sécurité</li>
+                    </ul>
+
+                    <h3>Résultats obtenus</h3>
+                    <p>
+                        Le scan a permis d’identifier plusieurs services exposés comme RPC, NetBIOS, SMB,
+                        HTTPS, VMware Authentification Daemon et WS-Discovery. Certains services comme SMB
+                        et NetBIOS présentent des risques s’ils ne sont pas correctement filtrés.
+                    </p>
+
+                    <div class="skills-box">
+                        <h3>Compétences développées</h3>
+                        <ul>
+                            <li>Utilisation d’un outil d’analyse réseau</li>
+                            <li>Interprétation de résultats Nmap</li>
+                            <li>Identification de vulnérabilités potentielles</li>
+                            <li>Rédaction de recommandations de sécurisation</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Nmap</span>
+                        <span class="tag">PowerShell</span>
+                        <span class="tag">Windows</span>
+                        <span class="tag">Scan réseau</span>
+                        <span class="tag">SMB</span>
+                        <span class="tag">Sécurité</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="documents/projet-nmap.pdf" target="_blank" class="project-btn primary">
+                            <i class="fas fa-file-pdf"></i>
+                            Voir la documentation
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJET 3 -->
+                <article class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-boxes-stacked"></i>
+                    </div>
+
+                    <div class="project-meta">
+                        <span class="meta-item">Projet 3</span>
+                        <span class="meta-item">Gestion de parc</span>
+                    </div>
+
+                    <h2>Installation et configuration de Snipe-IT</h2>
+
+                    <p>
+                        Ce projet consiste à installer et configurer Snipe-IT, une application web open-source
+                        de gestion de parc informatique. Elle permet de centraliser l’inventaire du matériel,
+                        des licences, des consommables et des utilisateurs.
+                    </p>
+
+                    <h3>Objectifs du projet</h3>
+                    <ul>
+                        <li>Installer Snipe-IT sur un serveur Linux</li>
+                        <li>Configurer Apache, MariaDB, PHP et les extensions nécessaires</li>
+                        <li>Créer une base de données dédiée</li>
+                        <li>Installer Composer et les dépendances PHP</li>
+                        <li>Finaliser l’installation via l’interface web</li>
+                    </ul>
+
+                    <h3>Réalisation</h3>
+                    <p>
+                        L’installation comprend la mise à jour du système, l’installation des prérequis,
+                        la création de la base de données, le clonage du dépôt Snipe-IT, la configuration
+                        du fichier .env, les permissions Linux et la création du VirtualHost Apache.
+                    </p>
+
+                    <div class="skills-box">
+                        <h3>Compétences développées</h3>
+                        <ul>
+                            <li>Déploiement d’une application web professionnelle</li>
+                            <li>Administration Linux</li>
+                            <li>Configuration Apache, MariaDB et PHP</li>
+                            <li>Gestion des permissions et dépendances</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Snipe-IT</span>
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag">Apache</span>
+                        <span class="tag">MariaDB</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">Composer</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="documents/projet-snipe-it.pptx" target="_blank" class="project-btn primary">
+                            <i class="fas fa-file-powerpoint"></i>
+                            Voir la présentation
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJET 4 -->
+                <article class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-building-circle-check"></i>
+                    </div>
+
+                    <div class="project-meta">
+                        <span class="meta-item">Projet 4</span>
+                        <span class="meta-item">Application web</span>
+                    </div>
+
+                    <h2>Installation et déploiement d’openMAINT</h2>
+
+                    <p>
+                        Ce projet consiste à installer openMAINT, une application open source de gestion
+                        de maintenance et d’actifs. Le déploiement a été réalisé sur une machine virtuelle Ubuntu
+                        avec Apache Tomcat.
+                    </p>
+
+                    <h3>Objectifs du projet</h3>
+                    <ul>
+                        <li>Créer une machine virtuelle Ubuntu</li>
+                        <li>Installer Java, nécessaire à Tomcat et openMAINT</li>
+                        <li>Installer et configurer Apache Tomcat 9</li>
+                        <li>Télécharger le fichier WAR openMAINT</li>
+                        <li>Déployer l’application dans Tomcat</li>
+                    </ul>
+
+                    <h3>Réalisation</h3>
+                    <p>
+                        Après l’installation d’Ubuntu, le serveur a été mis à jour, Java installé,
+                        puis Tomcat configuré dans le répertoire /opt/tomcat9. Le fichier openmaint.war
+                        a ensuite été copié dans le dossier webapps afin de déclencher son déploiement.
+                    </p>
+
+                    <div class="skills-box">
+                        <h3>Compétences développées</h3>
+                        <ul>
+                            <li>Création et configuration d’une machine virtuelle</li>
+                            <li>Installation d’un serveur Linux</li>
+                            <li>Déploiement d’une application Java avec Tomcat</li>
+                            <li>Vérification d’un service web via navigateur</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">openMAINT</span>
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Tomcat 9</span>
+                        <span class="tag">WAR</span>
+                        <span class="tag">VMware</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="documents/projet-openmaint.pdf" target="_blank" class="project-btn primary">
+                            <i class="fas fa-file-pdf"></i>
+                            Voir la documentation
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJET 5 -->
+                <article class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+
+                    <div class="project-meta">
+                        <span class="meta-item">Projet 5</span>
+                        <span class="meta-item">Support IT</span>
+                    </div>
+
+                    <h2>Installation et configuration de GLPI</h2>
+
+                    <p>
+                        Ce projet consiste à installer et configurer GLPI sur Debian 12.5 afin de mettre en place
+                        une solution de gestion de parc informatique et de support. L’installation inclut Apache,
+                        PHP, MariaDB et la sécurisation de l’application.
+                    </p>
+
+                    <h3>Objectifs du projet</h3>
+                    <ul>
+                        <li>Installer Debian dans une machine virtuelle</li>
+                        <li>Installer Apache2, PHP et MariaDB</li>
+                        <li>Créer une base de données dédiée à GLPI</li>
+                        <li>Déployer GLPI dans /var/www/html</li>
+                        <li>Finaliser l’installation via l’interface web</li>
+                        <li>Sécuriser l’installation après déploiement</li>
+                    </ul>
+
+                    <h3>Réalisation</h3>
+                    <p>
+                        Le projet comprend l’installation du système Debian, la préparation des services,
+                        la création de la base de données, le téléchargement de GLPI, l’attribution des droits
+                        à www-data et la configuration finale depuis l’interface web.
+                    </p>
+
+                    <div class="skills-box">
+                        <h3>Compétences développées</h3>
+                        <ul>
+                            <li>Installation d’un serveur Debian</li>
+                            <li>Configuration Apache, PHP et MariaDB</li>
+                            <li>Déploiement d’une solution de gestion de parc</li>
+                            <li>Sécurisation de l’installation après configuration</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">GLPI</span>
+                        <span class="tag">Debian 12.5</span>
+                        <span class="tag">Apache2</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">MariaDB</span>
+                        <span class="tag">phpMyAdmin</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="documents/projet-glpi.pdf" target="_blank" class="project-btn primary">
+                            <i class="fas fa-file-pdf"></i>
+                            Voir la documentation
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJET 6 -->
+                <article class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-users-gear"></i>
+                    </div>
+
+                    <div class="project-meta">
+                        <span class="meta-item">Projet 6</span>
+                        <span class="meta-item">Active Directory</span>
+                    </div>
+
+                    <h2>Gestion des objets de stratégies de groupe — GPO</h2>
+
+                    <p>
+                        Ce projet consiste à mettre en place des GPO dans un domaine Active Directory nommé Win.lan
+                        afin de centraliser, sécuriser et uniformiser la configuration des postes utilisateurs.
+                    </p>
+
+                    <h3>Objectifs du projet</h3>
+                    <ul>
+                        <li>Administrer un domaine Active Directory</li>
+                        <li>Créer et lier une GPO à une unité d’organisation</li>
+                        <li>Bloquer l’accès au Panneau de configuration</li>
+                        <li>Déployer un fond d’écran via un partage réseau</li>
+                        <li>Vérifier l’application de la stratégie côté client</li>
+                    </ul>
+
+                    <h3>Réalisation</h3>
+                    <p>
+                        Une GPO dédiée a été créée pour une OU du domaine Win.lan. Elle applique des restrictions
+                        utilisateur et déploie un environnement standardisé. Les tests côté client ont permis
+                        de vérifier le blocage du Panneau de configuration et l’application du fond d’écran.
+                    </p>
+
+                    <div class="skills-box">
+                        <h3>Compétences développées</h3>
+                        <ul>
+                            <li>Administration Windows Server</li>
+                            <li>Gestion des OU dans Active Directory</li>
+                            <li>Création, modification et liaison de GPO</li>
+                            <li>Sécurisation et standardisation des postes utilisateurs</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Windows Server</span>
+                        <span class="tag">Active Directory</span>
+                        <span class="tag">GPO</span>
+                        <span class="tag">GPMC</span>
+                        <span class="tag">Win.lan</span>
+                        <span class="tag">VMware</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="documents/projet-gpo.docx" target="_blank" class="project-btn primary">
+                            <i class="fas fa-file-word"></i>
+                            Voir la documentation
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 - Portfolio Annaelle Mpassi NG | BTS SIO option SISR</p>
+    </footer>
+
+</body>
+</html>
