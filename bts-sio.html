@@ -2,213 +2,575 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>BTS SIO - Présentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTS SIO - Annaelle Mpassi NG</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" 
+        rel="stylesheet"
+    >
 
     <style>
-        body {
-            font-family: "Georgia", "Times New Roman", serif;
-            background: #f5f5f5;
+        * {
             margin: 0;
-            padding: 40px 0;
-            color: #222;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .document {
-            max-width: 900px;
+        :root {
+            --primary: #070908;
+            --secondary: #141716;
+            --accent: #7ddfc3;
+            --accent-dark: #4fb99f;
+            --text: #ffffff;
+            --text-muted: #a8a8a8;
+            --border: #2f3a37;
+            --glass: rgba(125, 223, 195, 0.12);
+            --glow: rgba(125, 223, 195, 0.28);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #111816 0%, #080b0a 45%, #050505 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 8, 0.88);
+            border-bottom: 1px solid rgba(125, 223, 195, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* MAIN */
+        main {
+            min-height: calc(100vh - 86px);
+            padding: 75px 8%;
+        }
+
+        .container {
+            max-width: 1080px;
             margin: auto;
-            background: white;
-            padding: 60px 70px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.08);
-            border-radius: 6px;
+        }
+
+        .small-title {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 14px;
         }
 
         h1 {
-            text-align: center;
-            font-size: 32px;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            max-width: 850px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .content-box {
+            background: rgba(20, 23, 22, 0.82);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 22px;
+            padding: 34px;
+            margin-bottom: 26px;
+        }
+
+        .content-box h2 {
+            color: var(--accent);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .content-box h3 {
+            color: var(--text);
+            font-size: 1.05rem;
+            margin-top: 22px;
             margin-bottom: 10px;
         }
 
-        .subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 40px;
-        }
-
-        h2 {
-            font-size: 20px;
-            margin-top: 35px;
-            margin-bottom: 10px;
-            border-left: 4px solid #3b82f6;
-            padding-left: 10px;
-        }
-
-        p {
-            text-align: justify;
+        .content-box p {
+            color: var(--text-muted);
             line-height: 1.8;
             margin-bottom: 15px;
         }
 
-        ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
+        .content-box p:last-child {
+            margin-bottom: 0;
         }
 
-        ul li {
-            margin-bottom: 8px;
-            line-height: 1.6;
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+            margin-bottom: 26px;
         }
 
-        .section {
-            margin-bottom: 25px;
+        .options-grid .content-box {
+            margin-bottom: 0;
         }
 
-        .footer {
-            margin-top: 50px;
-            font-size: 13px;
-            color: #888;
+        .option-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid rgba(125, 223, 195, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .option-icon i {
+            color: var(--accent);
+            font-size: 1.45rem;
+        }
+
+        .list {
+            margin-top: 14px;
+            padding-left: 20px;
+        }
+
+        .list li {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .choice-box {
+            background:
+                linear-gradient(rgba(20, 23, 22, 0.92), rgba(20, 23, 22, 0.92)),
+                radial-gradient(circle at top left, rgba(125, 223, 195, 0.18), transparent 45%);
+            border-color: rgba(125, 223, 195, 0.25);
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .highlight-card {
+            background: rgba(125, 223, 195, 0.06);
+            border: 1px solid rgba(125, 223, 195, 0.16);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .highlight-card i {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .highlight-card h3 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .highlight-card p {
+            margin: 0;
+            font-size: 0.93rem;
+        }
+
+        footer {
             text-align: center;
+            padding: 25px;
+            color: #888;
+            border-top: 1px solid rgba(125, 223, 195, 0.12);
+            background: rgba(7, 9, 8, 0.85);
         }
 
-        @media (max-width: 768px) {
-            .document {
-                padding: 30px;
+        /* RESPONSIVE */
+        @media screen and (max-width: 1050px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .highlight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            header {
+                padding: 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            main {
+                padding: 55px 20px 70px;
+            }
+
+            .content-box {
+                padding: 24px;
             }
         }
     </style>
 </head>
+
 <body>
 
-<div class="document">
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">Annaelle NG</a>
 
-    <h1>Le BTS SIO</h1>
-    <p class="subtitle">Services Informatiques aux Organisations</p>
-
-    <div class="section">
-        <h2>1. Présentation générale</h2>
-        <p>
-            Le BTS SIO (Services Informatiques aux Organisations) est un diplôme de niveau Bac+2
-            qui forme des professionnels capables de répondre aux besoins informatiques des entreprises.
-            Il permet d’acquérir des compétences dans la gestion des systèmes, des réseaux et des applications.
-        </p>
-        <p>
-            Cette formation combine des enseignements théoriques et pratiques, à travers des cours,
-            des ateliers, des projets et des stages en entreprise. Elle prépare les étudiants à intégrer
-            rapidement le monde professionnel ou à poursuivre leurs études.
-        </p>
-    </div>
-
-    <div class="section">
-        <h2>2. Les deux spécialités du BTS SIO</h2>
-
-        <p>
-            Le BTS SIO propose deux spécialités distinctes, permettant aux étudiants de s’orienter
-            selon leur projet professionnel.
-        </p>
-
-        <p><strong>Option SISR (Solutions d’Infrastructure, Systèmes et Réseaux)</strong></p>
-        <p>
-            Cette option est orientée vers l’administration des infrastructures informatiques.
-            Elle forme des techniciens capables de gérer des réseaux, des serveurs et d’assurer
-            la sécurité des systèmes.
-        </p>
-
-        <ul>
-            <li>Installation et configuration de serveurs</li>
-            <li>Gestion des réseaux informatiques</li>
-            <li>Maintenance et support technique</li>
-            <li>Sécurisation des systèmes et des données</li>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <li><a href="bts-sio.html" class="active">BTS SIO</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="e6.html">E6</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
+    </header>
 
-        <p><strong>Option SLAM (Solutions Logicielles et Applications Métiers)</strong></p>
-        <p>
-            Cette option est orientée vers le développement d’applications. Elle forme des développeurs
-            capables de concevoir, programmer et maintenir des logiciels adaptés aux besoins des entreprises.
-        </p>
+    <main>
+        <div class="container">
 
-        <ul>
-            <li>Développement d’applications web et logicielles</li>
-            <li>Programmation (PHP, Java, JavaScript, etc.)</li>
-            <li>Gestion de bases de données</li>
-            <li>Conception et maintenance de solutions informatiques</li>
-        </ul>
-    </div>
+            <p class="small-title">Formation</p>
 
-    <div class="section">
-        <h2>3. Compétences développées</h2>
+            <h1>Le BTS SIO</h1>
 
-        <p>
-            Le BTS SIO permet de développer un ensemble de compétences techniques et professionnelles,
-            communes aux deux spécialités.
-        </p>
+            <p class="intro">
+                Le BTS SIO, Services Informatiques aux Organisations, est une formation de niveau Bac+2
+                qui prépare aux métiers de l’informatique. Elle forme des techniciens capables de répondre
+                aux besoins informatiques d’une organisation, que ce soit dans le domaine des infrastructures,
+                des réseaux, du support ou du développement d’applications.
+            </p>
 
-        <p><strong>Compétences techniques :</strong></p>
-        <ul>
-            <li>Maîtrise des systèmes informatiques</li>
-            <li>Gestion des réseaux et des applications</li>
-            <li>Utilisation d’outils professionnels</li>
-            <li>Notions de cybersécurité</li>
-        </ul>
+            <!-- PRESENTATION -->
+            <div class="content-box">
+                <h2>Qu’est-ce que le BTS SIO ?</h2>
 
-        <p><strong>Compétences professionnelles :</strong></p>
-        <ul>
-            <li>Travail en équipe</li>
-            <li>Gestion de projet</li>
-            <li>Communication professionnelle</li>
-            <li>Analyse des besoins d’une organisation</li>
-        </ul>
-    </div>
+                <p>
+                    Le <strong>BTS Services Informatiques aux Organisations</strong> est une formation
+                    professionnelle qui permet d’acquérir des compétences techniques et méthodologiques
+                    dans le domaine informatique. Elle prépare les étudiants à intervenir sur le système
+                    d’information d’une entreprise, d’une administration ou d’une association.
+                </p>
 
-    <div class="section">
-        <h2>4. Débouchés professionnels</h2>
-        <p>
-            Après l’obtention du BTS SIO, les diplômés peuvent accéder à différents métiers selon leur spécialité.
-        </p>
+                <p>
+                    Durant les deux années de formation, les étudiants apprennent à analyser les besoins
+                    des utilisateurs, proposer des solutions informatiques, assurer le support technique,
+                    participer à des projets numériques, sécuriser les services informatiques et documenter
+                    leurs réalisations.
+                </p>
 
-        <ul>
-            <li>Technicien systèmes et réseaux (SISR)</li>
-            <li>Administrateur systèmes ou réseaux (SISR)</li>
-            <li>Développeur web ou logiciel (SLAM)</li>
-            <li>Technicien support informatique</li>
-        </ul>
-    </div>
+                <p>
+                    La formation se divise en deux options : <strong>SISR</strong>, orientée systèmes,
+                    réseaux et infrastructures, et <strong>SLAM</strong>, orientée développement
+                    d’applications et solutions logicielles.
+                </p>
 
-    <div class="section">
-        <h2>5. Poursuite d’études</h2>
-        <p>
-            Le BTS SIO permet également de poursuivre ses études vers :
-        </p>
+                <div class="highlight-grid">
+                    <div class="highlight-card">
+                        <i class="fas fa-user-cog"></i>
+                        <h3>Support</h3>
+                        <p>Assistance aux utilisateurs, diagnostic et résolution d’incidents.</p>
+                    </div>
 
-        <ul>
-            <li>Licence professionnelle</li>
-            <li>Bachelor informatique</li>
-            <li>Écoles d’ingénieurs ou spécialisées</li>
-            <li>Formations en cybersécurité, cloud ou développement</li>
-        </ul>
-    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-diagram-project"></i>
+                        <h3>Projets</h3>
+                        <p>Travail en mode projet, documentation et situations professionnelles.</p>
+                    </div>
 
-    <div class="section">
-        <h2>6. Mon orientation</h2>
-        <p>
-            Dans le cadre de ma formation, j’ai choisi l’option <strong>SISR</strong>, qui correspond davantage
-            à mon intérêt pour les infrastructures informatiques, les réseaux et la cybersécurité.
-        </p>
-        <p>
-            Cette spécialisation me permet de développer des compétences en administration systèmes,
-            en configuration réseau et en sécurisation des environnements informatiques.
-        </p>
-        <p>
-            À travers mon parcours, j’ai également acquis des bases en développement, ce qui me permet
-            d’avoir une vision globale des systèmes d’information et de mieux comprendre les interactions
-            entre les différentes composantes d’un système informatique.
-        </p>
-    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-shield-halved"></i>
+                        <h3>Sécurité</h3>
+                        <p>Bonnes pratiques, protection des accès et cybersécurité.</p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="footer">
-        Portfolio BTS SIO
-    </div>
+            <!-- OBJECTIFS -->
+            <div class="content-box">
+                <h2>Les objectifs de la formation</h2>
 
-</div>
+                <p>
+                    L’objectif du BTS SIO est de former des professionnels capables de participer
+                    à la mise en place, à la maintenance, à l’évolution et à la sécurisation
+                    des solutions informatiques utilisées par les organisations.
+                </p>
+
+                <ul class="list">
+                    <li>Assurer le support et l’assistance aux utilisateurs</li>
+                    <li>Gérer le patrimoine informatique d’une organisation</li>
+                    <li>Participer à la mise en place de services informatiques</li>
+                    <li>Administrer des systèmes, des réseaux ou des applications</li>
+                    <li>Développer ou maintenir des solutions logicielles selon l’option choisie</li>
+                    <li>Appliquer les bonnes pratiques de cybersécurité</li>
+                    <li>Travailler en mode projet et rédiger une documentation professionnelle</li>
+                    <li>Organiser une veille technologique</li>
+                </ul>
+            </div>
+
+            <!-- ENSEIGNEMENTS -->
+            <div class="content-box">
+                <h2>Les enseignements du BTS SIO</h2>
+
+                <p>
+                    Le BTS SIO comprend des enseignements généraux et professionnels.
+                    Les matières permettent de développer à la fois des compétences techniques,
+                    des compétences de communication et une compréhension du fonctionnement des organisations.
+                </p>
+
+                <ul class="list">
+                    <li><strong>Culture générale et expression :</strong> rédaction, argumentation et communication écrite.</li>
+                    <li><strong>Anglais :</strong> communication professionnelle dans un contexte informatique.</li>
+                    <li><strong>Mathématiques pour l’informatique :</strong> logique, algorithmique et raisonnement.</li>
+                    <li><strong>CEJM :</strong> culture économique, juridique et managériale appliquée aux organisations.</li>
+                    <li><strong>Support et mise à disposition de services informatiques :</strong> assistance, incidents, services et patrimoine informatique.</li>
+                    <li><strong>Cybersécurité :</strong> protection des données, sécurisation des accès, bonnes pratiques et sensibilisation.</li>
+                    <li><strong>Ateliers de professionnalisation :</strong> projets pratiques, situations professionnelles et préparation aux épreuves.</li>
+                    <li><strong>Enseignements de spécialité :</strong> systèmes et réseaux pour SISR, développement et applications pour SLAM.</li>
+                </ul>
+            </div>
+
+            <!-- OPTIONS -->
+            <div class="options-grid">
+
+                <div class="content-box">
+                    <div class="option-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+
+                    <h2>Option SISR</h2>
+
+                    <p>
+                        L’option <strong>SISR</strong>, Solutions d’Infrastructure, Systèmes et Réseaux,
+                        forme les étudiants à l’administration, la maintenance et la sécurisation
+                        des infrastructures informatiques.
+                    </p>
+
+                    <p>
+                        Cette option concerne tout ce qui permet à une organisation de faire fonctionner
+                        son système informatique : serveurs, postes clients, comptes utilisateurs,
+                        services réseau, équipements, sauvegardes, virtualisation et sécurité.
+                    </p>
+
+                    <ul class="list">
+                        <li>Installer et administrer des serveurs Windows et Linux</li>
+                        <li>Configurer des services réseau comme DHCP, DNS ou Active Directory</li>
+                        <li>Gérer les utilisateurs, groupes, droits et permissions</li>
+                        <li>Configurer des routeurs, switchs, VLAN et services réseau</li>
+                        <li>Mettre en place des solutions de virtualisation</li>
+                        <li>Participer à la sécurisation des systèmes et des réseaux</li>
+                        <li>Assurer le support informatique auprès des utilisateurs</li>
+                    </ul>
+
+                    <h3>Débouchés de l’option SISR</h3>
+
+                    <ul class="list">
+                        <li>Technicien systèmes et réseaux</li>
+                        <li>Technicien support informatique</li>
+                        <li>Technicien d’infrastructure</li>
+                        <li>Administrateur systèmes et réseaux junior</li>
+                        <li>Technicien réseau</li>
+                        <li>Technicien cybersécurité junior</li>
+                        <li>Technicien helpdesk / support utilisateur</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <div class="option-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+
+                    <h2>Option SLAM</h2>
+
+                    <p>
+                        L’option <strong>SLAM</strong>, Solutions Logicielles et Applications Métiers,
+                        forme les étudiants à la conception, au développement, à la maintenance
+                        et à l’évolution d’applications informatiques.
+                    </p>
+
+                    <p>
+                        Cette option concerne la création de solutions logicielles adaptées aux besoins
+                        d’une organisation : sites web, applications métiers, bases de données,
+                        interfaces utilisateur et outils internes.
+                    </p>
+
+                    <ul class="list">
+                        <li>Analyser les besoins d’un utilisateur ou d’une organisation</li>
+                        <li>Concevoir et développer des applications web ou logicielles</li>
+                        <li>Utiliser des langages de programmation</li>
+                        <li>Créer et exploiter des bases de données</li>
+                        <li>Tester, corriger et faire évoluer une application</li>
+                        <li>Sécuriser une application et ses données</li>
+                        <li>Rédiger une documentation technique ou utilisateur</li>
+                    </ul>
+
+                    <h3>Débouchés de l’option SLAM</h3>
+
+                    <ul class="list">
+                        <li>Développeur d’applications</li>
+                        <li>Développeur web</li>
+                        <li>Développeur logiciel junior</li>
+                        <li>Analyste programmeur</li>
+                        <li>Technicien développement</li>
+                        <li>Gestionnaire de bases de données junior</li>
+                        <li>Intégrateur web</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- COMPETENCES -->
+            <div class="content-box">
+                <h2>Les compétences professionnelles travaillées</h2>
+
+                <p>
+                    Le BTS SIO permet de développer plusieurs compétences attendues dans le monde professionnel.
+                    Ces compétences sont évaluées à travers les projets, les stages, les situations professionnelles
+                    et le tableau de compétences.
+                </p>
+
+                <ul class="list">
+                    <li><strong>Gérer le patrimoine informatique :</strong> inventaire, suivi, gestion des équipements et des services.</li>
+                    <li><strong>Répondre aux incidents et aux demandes d’assistance :</strong> diagnostic, support et accompagnement des utilisateurs.</li>
+                    <li><strong>Développer la présence en ligne de l’organisation :</strong> création ou amélioration de services web.</li>
+                    <li><strong>Travailler en mode projet :</strong> organisation, documentation, répartition des tâches et suivi.</li>
+                    <li><strong>Mettre à disposition un service informatique :</strong> installation, configuration, test et mise en production.</li>
+                    <li><strong>Organiser son développement professionnel :</strong> veille, portfolio, CV, certifications et projet professionnel.</li>
+                </ul>
+            </div>
+
+            <!-- POURSUITE D'ETUDES -->
+            <div class="content-box">
+                <h2>Les poursuites d’études possibles</h2>
+
+                <p>
+                    Après un BTS SIO, il est possible d’entrer directement dans le monde professionnel
+                    ou de poursuivre ses études afin de se spécialiser davantage.
+                </p>
+
+                <ul class="list">
+                    <li>Licence professionnelle en administration systèmes et réseaux</li>
+                    <li>Bachelor administrateur systèmes et réseaux</li>
+                    <li>Bachelor cybersécurité</li>
+                    <li>Bachelor développement web ou développement d’applications</li>
+                    <li>Licence informatique</li>
+                    <li>École d’ingénieur ou master après une poursuite adaptée</li>
+                    <li>Formations spécialisées en cloud, cybersécurité, data ou infrastructure IT</li>
+                </ul>
+            </div>
+
+            <!-- MON CHOIX -->
+            <div class="content-box choice-box">
+                <h2>Pourquoi j’ai choisi l’option SISR ?</h2>
+
+                <p>
+                    J’ai choisi l’option <strong>SISR</strong> car je m’intéresse particulièrement
+                    au fonctionnement des infrastructures informatiques. Je souhaite comprendre comment
+                    les serveurs, les réseaux, les services, les utilisateurs et la sécurité sont organisés
+                    dans un environnement professionnel.
+                </p>
+
+                <p>
+                    Cette option me permet de travailler sur des notions concrètes comme Windows Server,
+                    Linux, Active Directory, DHCP, DNS, la virtualisation, les VLAN, le routage,
+                    la supervision, le support informatique et la sécurisation des accès.
+                </p>
+
+                <p>
+                    Ce choix est cohérent avec mon projet professionnel, car je souhaite poursuivre
+                    vers une formation en administration systèmes et réseaux, idéalement en alternance,
+                    afin de devenir administratrice systèmes et réseaux.
+                </p>
+
+                <p>
+                    À plus long terme, je souhaite également renforcer mes connaissances en cybersécurité,
+                    car la protection des infrastructures et des données est devenue essentielle
+                    dans toutes les organisations.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 - Portfolio Annaelle Mpassi NG | BTS SIO option SISR</p>
+    </footer>
 
 </body>
 </html>
