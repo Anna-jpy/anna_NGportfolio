@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stages & Certifications - Annaelle Mpassi NG</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" 
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #070908;
+            --secondary: #141716;
+            --accent: #7ddfc3;
+            --accent-dark: #4fb99f;
+            --text: #ffffff;
+            --text-muted: #a8a8a8;
+            --border: #2f3a37;
+            --glass: rgba(125, 223, 195, 0.12);
+            --glow: rgba(125, 223, 195, 0.28);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #111816 0%, #080b0a 45%, #050505 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 8, 0.88);
+            border-bottom: 1px solid rgba(125, 223, 195, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* MAIN */
+        main {
+            min-height: calc(100vh - 86px);
+            padding: 75px 8%;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: auto;
+        }
+
+        .small-title {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            max-width: 780px;
+            line-height: 1.8;
+            margin-bottom: 45px;
+        }
+
+        /* SECTIONS */
+        .section {
+            margin-bottom: 55px;
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-size: 1.55rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .stage-box,
+        .cert-box {
+            background: rgba(20, 23, 22, 0.82);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 24px;
+            transition: 0.3s ease;
+        }
+
+        .stage-box:hover,
+        .cert-box:hover {
+            border-color: rgba(125, 223, 195, 0.42);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .stage-header h3,
+        .cert-box h3 {
+            color: var(--text);
+            font-size: 1.22rem;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            background: rgba(125, 223, 195, 0.08);
+            border: 1px solid rgba(125, 223, 195, 0.22);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            height: fit-content;
+        }
+
+        .stage-info {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .stage-info p {
+            margin-bottom: 8px;
+        }
+
+        .missions-title {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 18px;
+            border-radius: 9px;
+            background: rgba(125, 223, 195, 0.08);
+            border: 1px solid rgba(125, 223, 195, 0.35);
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .doc-link:hover {
+            background: var(--accent);
+            color: #06201a;
+            transform: translateY(-2px);
+        }
+
+        .cert-box p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .cert-grid .cert-box {
+            margin-bottom: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            border-top: 1px solid rgba(125, 223, 195, 0.12);
+            background: rgba(7, 9, 8, 0.85);
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 1050px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            header {
+                padding: 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            main {
+                padding: 55px 20px 70px;
+            }
+
+            .stage-box,
+            .cert-box {
+                padding: 24px;
+            }
+
+            .doc-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">Annaelle NG</a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <li><a href="bts-sio.html">BTS SIO</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="certifications.html" class="active">Certifications</a></li>
+            <li><a href="e6.html">E6</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <p class="small-title">Parcours professionnel</p>
+
+            <h1>Stages & certifications</h1>
+
+            <p class="intro">
+                Cette page présente mes attestations de stage ainsi que mes certifications
+                obtenues dans le cadre de mon parcours en BTS SIO option SISR.
+            </p>
+
+            <!-- STAGES -->
+            <section class="section">
+                <h2 class="section-title">Conventions et attestations de stage</h2>
+
+                <!-- STAGE 1 -->
+                <div class="stage-box">
+                    <div class="stage-header">
+                        <h3>Stage en maintenance et support informatique</h3>
+
+                        <span class="badge">
+                            <i class="fas fa-briefcase"></i>
+                            1re année
+                        </span>
+                    </div>
+
+                    <div class="stage-info">
+                        <p>
+                            <strong>Organisme d’accueil :</strong> Les Réparateurs Mac et PC
+                        </p>
+
+                        <p>
+                            <strong>Lieu :</strong> Montreuil
+                        </p>
+
+                        <p>
+                            <strong>Période :</strong> du 12 mai 2025 au 18 juillet 2025
+                        </p>
+
+                        <p>
+                            <strong>Durée :</strong> 6 semaines
+                        </p>
+                    </div>
+
+                    <h4 class="missions-title">Missions principales</h4>
+
+                    <ul>
+                        <li>Maintenance, diagnostic et dépannage de postes PC et Mac</li>
+                        <li>Support technique niveau 1 auprès des utilisateurs</li>
+                        <li>Résolution de problèmes matériels et logiciels courants</li>
+                        <li>Assistance et accompagnement des utilisateurs</li>
+                    </ul>
+
+                    <a href="documents/attestation-stage-1.pdf" target="_blank" class="doc-link">
+                        <i class="fas fa-file-pdf"></i>
+                        Voir l’attestation de stage
+                    </a>
+                </div>
+
+                <!-- STAGE 2 -->
+                <div class="stage-box">
+                    <div class="stage-header">
+                        <h3>Stage en administration systèmes et réseaux</h3>
+
+                        <span class="badge">
+                            <i class="fas fa-briefcase"></i>
+                            2e année
+                        </span>
+                    </div>
+
+                    <div class="stage-info">
+                        <p>
+                            <strong>Organisme d’accueil :</strong> Institut F2I
+                        </p>
+
+                        <p>
+                            <strong>Lieu :</strong> Vincennes
+                        </p>
+
+                        <p>
+                            <strong>Période :</strong> du 8 décembre 2025 au 13 janvier 2026
+                        </p>
+
+                        <p>
+                            <strong>Durée :</strong> 5 semaines
+                        </p>
+                    </div>
+
+                    <h4 class="missions-title">Missions principales</h4>
+
+                    <ul>
+                        <li>Gestion de serveurs Windows et Linux</li>
+                        <li>Administration Active Directory</li>
+                        <li>Configuration des services DHCP et DNS</li>
+                        <li>Virtualisation avec VMware et Hyper-V</li>
+                        <li>Supervision réseau</li>
+                        <li>Configuration de routeurs et de switchs</li>
+                        <li>Participation à des tâches de sécurité réseau</li>
+                    </ul>
+
+                    <a href="documents/attestation-stage-2.pdf" target="_blank" class="doc-link">
+                        <i class="fas fa-file-pdf"></i>
+                        Voir l’attestation de stage
+                    </a>
+                </div>
+            </section>
+
+            <!-- CERTIFICATIONS -->
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+
+                <div class="cert-grid">
+
+                    <!-- CERTIFICAT 1 -->
+                    <div class="cert-box">
+                        <div class="stage-header">
+                            <h3>Guide d’utilisation complet de Windows 11</h3>
+
+                            <span class="badge">
+                                <i class="fas fa-certificate"></i>
+                                Cursa
+                            </span>
+                        </div>
+
+                        <div class="stage-info">
+                            <p>
+                                <strong>Plateforme :</strong> Cursa
+                            </p>
+
+                            <p>
+                                <strong>Date d’obtention :</strong> 05 février 2026
+                            </p>
+
+                            <p>
+                                <strong>Contenu :</strong> 70 pages lues et 70 exercices réalisés
+                            </p>
+                        </div>
+
+                        <p>
+                            Cette certification m’a permis de renforcer mes connaissances sur l’utilisation
+                            de Windows 11, son environnement, ses fonctionnalités et sa prise en main.
+                        </p>
+
+                        <a href="documents/certificat-windows11-cursa.pdf" target="_blank" class="doc-link">
+                            <i class="fas fa-file-pdf"></i>
+                            Voir le certificat
+                        </a>
+                    </div>
+
+                    <!-- CERTIFICAT 2 -->
+                    <div class="cert-box">
+                        <div class="stage-header">
+                            <h3>Introduction à la méthode EBIOS Risk Manager</h3>
+
+                            <span class="badge">
+                                <i class="fas fa-shield-halved"></i>
+                                Club EBIOS
+                            </span>
+                        </div>
+
+                        <div class="stage-info">
+                            <p>
+                                <strong>Organisme :</strong> Club EBIOS
+                            </p>
+
+                            <p>
+                                <strong>Date d’obtention :</strong> 24 janvier 2026
+                            </p>
+
+                            <p>
+                                <strong>Durée :</strong> 3 heures
+                            </p>
+                        </div>
+
+                        <p>
+                            Cette certification m’a permis de découvrir les bases de la méthode EBIOS Risk Manager,
+                            utilisée dans le domaine de la cybersécurité pour analyser les risques numériques
+                            et mieux comprendre la démarche de gestion des risques.
+                        </p>
+
+                        <a href="documents/certificat-ebios.pdf" target="_blank" class="doc-link">
+                            <i class="fas fa-file-pdf"></i>
+                            Voir le certificat
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 - Portfolio Annaelle Mpassi NG | BTS SIO option SISR</p>
+    </footer>
+
+</body>
+</html>
