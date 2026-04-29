@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Annaelle Mpassi NG</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" 
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #070908;
+            --secondary: #141716;
+            --accent: #7ddfc3;
+            --accent-dark: #4fb99f;
+            --text: #ffffff;
+            --text-muted: #a8a8a8;
+            --border: #2f3a37;
+            --glass: rgba(125, 223, 195, 0.12);
+            --glow: rgba(125, 223, 195, 0.28);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #111816 0%, #080b0a 45%, #050505 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 8, 0.88);
+            border-bottom: 1px solid rgba(125, 223, 195, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* HERO */
+        .portfolio-hero {
+            padding: 90px 8% 50px;
+            text-align: center;
+        }
+
+        .small-title {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .portfolio-hero h1 {
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .portfolio-hero p {
+            max-width: 800px;
+            margin: auto;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* GRID */
+        .portfolio-section {
+            padding: 35px 8% 90px;
+        }
+
+        .portfolio-grid {
+            max-width: 1180px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+        }
+
+        .portfolio-card {
+            min-height: 260px;
+            background: rgba(20, 23, 22, 0.82);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 22px;
+            padding: 30px;
+            color: var(--text);
+            transition: 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-card::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(125, 223, 195, 0.18), transparent 65%);
+            transition: 0.35s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .portfolio-card:hover::before {
+            transform: scale(1.25);
+        }
+
+        .card-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid rgba(125, 223, 195, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-icon i {
+            color: var(--accent);
+            font-size: 1.6rem;
+        }
+
+        .portfolio-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text);
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-link {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s ease;
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-card:hover .card-link {
+            gap: 13px;
+        }
+
+        /* SPECIAL CARD */
+        .main-card {
+            grid-column: span 2;
+            background:
+                linear-gradient(rgba(20, 23, 22, 0.92), rgba(20, 23, 22, 0.92)),
+                radial-gradient(circle at top left, rgba(125, 223, 195, 0.25), transparent 45%);
+        }
+
+        .main-card h2 {
+            font-size: 1.55rem;
+        }
+
+        /* QUICK NOTE */
+        .quick-note {
+            max-width: 1180px;
+            margin: 0 auto 35px;
+            background: rgba(125, 223, 195, 0.08);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 18px;
+            padding: 22px 26px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .quick-note strong {
+            color: var(--accent);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            border-top: 1px solid rgba(125, 223, 195, 0.12);
+            background: rgba(7, 9, 8, 0.85);
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 1050px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-card {
+                grid-column: span 2;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-card {
+                grid-column: span 1;
+            }
+
+            .portfolio-hero {
+                padding-top: 65px;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            header {
+                padding: 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            .portfolio-hero {
+                padding: 55px 20px 35px;
+            }
+
+            .portfolio-section {
+                padding: 25px 20px 70px;
+            }
+
+            .portfolio-card {
+                padding: 24px;
+                min-height: auto;
+            }
+
+            .quick-note {
+                padding: 20px;
+                margin-bottom: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">Annaelle NG</a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <li><a href="bts-sio.html">BTS SIO</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="e6.html">E6</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- HERO -->
+    <section class="portfolio-hero">
+        <p class="small-title">Explorer mon univers professionnel</p>
+
+        <h1>Mon portfolio</h1>
+
+        <p>
+            Bienvenue dans mon portfolio. Vous y trouverez mon parcours, ma formation,
+            mes compétences techniques, mes projets réalisés en BTS SIO option SISR,
+            mes expériences en stage, mes certifications, mes situations professionnelles E6,
+            mon tableau de compétences ainsi que ma veille technologique.
+        </p>
+    </section>
+
+    <!-- CARDS -->
+    <section class="portfolio-section">
+
+        <div class="quick-note">
+            <strong>Objectif :</strong>
+            présenter de manière claire mon évolution, mes réalisations et les compétences développées
+            dans les domaines des systèmes, réseaux, support informatique, virtualisation et cybersécurité.
+        </div>
+
+        <div class="portfolio-grid">
+
+            <!-- Profil -->
+            <a href="profil.html" class="portfolio-card main-card">
+                <div class="card-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+
+                <h2>Profil</h2>
+
+                <p>
+                    Découvrez mon parcours, mes objectifs professionnels, mes qualités
+                    et mon orientation vers l’administration systèmes et réseaux.
+                </p>
+
+                <span class="card-link">
+                    Découvrir mon profil <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- BTS SIO -->
+            <a href="bts-sio.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+
+                <h2>BTS SIO</h2>
+
+                <p>
+                    Présentation du BTS Services Informatiques aux Organisations,
+                    des options SISR et SLAM, ainsi que de mon choix d’orientation.
+                </p>
+
+                <span class="card-link">
+                    Voir la formation <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Compétences -->
+            <a href="competences.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+
+                <h2>Compétences</h2>
+
+                <p>
+                    Retrouvez mes compétences en systèmes, réseaux, virtualisation,
+                    cybersécurité, support informatique et développement web.
+                </p>
+
+                <span class="card-link">
+                    Voir mes compétences <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Projets -->
+            <a href="projets.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+
+                <h2>Projets</h2>
+
+                <p>
+                    Consultez mes projets techniques : Active Directory, VLAN,
+                    ACL, DMZ, GLPI, site web dynamique et portfolio professionnel.
+                </p>
+
+                <span class="card-link">
+                    Voir mes projets <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Stages -->
+            <a href="stages.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+
+                <h2>Stages</h2>
+
+                <p>
+                    Découvrez mes expériences professionnelles en support informatique,
+                    maintenance PC/Mac, systèmes, réseaux et administration serveur.
+                </p>
+
+                <span class="card-link">
+                    Voir mes stages <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Tableau de compétences -->
+            <a href="tableau-competences.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-table"></i>
+                </div>
+
+                <h2>Tableau de compétences</h2>
+
+                <p>
+                    Accédez à la synthèse de mes compétences BTS SIO et aux situations
+                    professionnelles associées à mes réalisations.
+                </p>
+
+                <span class="card-link">
+                    Voir le tableau <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Certifications -->
+            <a href="certifications.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+
+                <h2>Certifications</h2>
+
+                <p>
+                    Retrouvez mes certifications, attestations, formations complémentaires
+                    et compétences validées ou en cours de validation.
+                </p>
+
+                <span class="card-link">
+                    Voir mes certifications <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- E6 -->
+            <a href="e6.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+
+                <h2>E6</h2>
+
+                <p>
+                    Présentation de mes situations professionnelles, projets techniques,
+                    documentations et productions préparées pour l’épreuve E6 du BTS SIO.
+                </p>
+
+                <span class="card-link">
+                    Voir mes situations E6 <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Veille -->
+            <a href="veille.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-rss"></i>
+                </div>
+
+                <h2>Veille technologique</h2>
+
+                <p>
+                    Présentation de ma veille sur l’intelligence artificielle
+                    appliquée à la cybersécurité et à la détection des menaces.
+                </p>
+
+                <span class="card-link">
+                    Voir ma veille <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Contact -->
+            <a href="contact.html" class="portfolio-card">
+                <div class="card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+
+                <h2>Contact</h2>
+
+                <p>
+                    Retrouvez mes informations de contact, mon CV, mon profil LinkedIn
+                    et mes liens professionnels.
+                </p>
+
+                <span class="card-link">
+                    Me contacter <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 - Portfolio Annaelle Mpassi NG | BTS SIO option SISR</p>
+    </footer>
+
+</body>
+</html>
