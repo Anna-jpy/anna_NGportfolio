@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Annaelle Mpassi NG</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" 
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #070908;
+            --secondary: #141716;
+            --accent: #7ddfc3;
+            --accent-dark: #4fb99f;
+            --text: #ffffff;
+            --text-muted: #a8a8a8;
+            --border: #2f3a37;
+            --glass: rgba(125, 223, 195, 0.12);
+            --glow: rgba(125, 223, 195, 0.28);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #111816 0%, #080b0a 45%, #050505 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 8, 0.88);
+            border-bottom: 1px solid rgba(125, 223, 195, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* MAIN */
+        main {
+            min-height: calc(100vh - 86px);
+            padding: 75px 8%;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: auto;
+        }
+
+        .small-title {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            max-width: 760px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .content-box {
+            background: rgba(20, 23, 22, 0.82);
+            border: 1px solid rgba(125, 223, 195, 0.18);
+            border-radius: 22px;
+            padding: 34px;
+            margin-bottom: 26px;
+        }
+
+        .content-box h2 {
+            color: var(--accent);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .content-box p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .dual-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+            margin-bottom: 26px;
+        }
+
+        .dual-section .content-box {
+            margin-bottom: 0;
+        }
+
+        .search-box {
+            background:
+                linear-gradient(rgba(20, 23, 22, 0.92), rgba(20, 23, 22, 0.92)),
+                radial-gradient(circle at top left, rgba(125, 223, 195, 0.18), transparent 45%);
+            border-color: rgba(125, 223, 195, 0.25);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            border-top: 1px solid rgba(125, 223, 195, 0.12);
+            background: rgba(7, 9, 8, 0.85);
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 1050px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .dual-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            header {
+                padding: 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            main {
+                padding: 55px 20px 70px;
+            }
+
+            .content-box {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">Annaelle NG</a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="profil.html" class="active">Profil</a></li>
+            <li><a href="bts-sio.html">BTS SIO</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="e6.html">E6</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <p class="small-title">Présentation</p>
+
+            <h1>Mon profil</h1>
+
+            <p class="intro">
+                Étudiante en BTS SIO option SISR, je construis mon parcours dans le domaine
+                des systèmes, des réseaux et de la cybersécurité. Je recherche actuellement
+                une alternance afin de poursuivre ma formation et développer mes compétences
+                en environnement professionnel.
+            </p>
+
+            <!-- À PROPOS -->
+            <div class="content-box">
+                <h2>À propos de moi</h2>
+
+                <p>
+                    Je m’appelle <strong>Annaelle Mpassi NG</strong> et je suis actuellement étudiante
+                    en <strong>BTS Services Informatiques aux Organisations</strong>, option
+                    <strong>Solutions d’Infrastructure, Systèmes et Réseaux</strong>.
+                </p>
+
+                <p>
+                    Mon parcours m’a progressivement orientée vers le domaine des infrastructures informatiques.
+                    À travers ma formation, mes travaux pratiques et mes expériences professionnelles,
+                    je découvre comment installer, configurer, administrer et sécuriser un environnement informatique.
+                </p>
+
+                <p>
+                    Je m’intéresse particulièrement aux systèmes Windows et Linux, aux services réseau
+                    comme DHCP et DNS, à Active Directory, à la virtualisation ainsi qu’au support utilisateur.
+                    Ces domaines me permettent de mieux comprendre le fonctionnement d’une infrastructure
+                    et l’importance d’un service informatique fiable, organisé et sécurisé.
+                </p>
+
+                <p>
+                    Aujourd’hui, je souhaite continuer à progresser en intégrant une alternance dans le domaine
+                    de l’administration systèmes et réseaux, afin de renforcer mes compétences techniques
+                    et de les appliquer dans un contexte professionnel réel.
+                </p>
+            </div>
+
+            <!-- PARCOURS ACTUEL + PROJET SUIVANT -->
+            <div class="dual-section">
+
+                <div class="content-box">
+                    <h2>Mon parcours actuel</h2>
+
+                    <p>
+                        Je suis actuellement étudiante en <strong>BTS SIO option SISR</strong>,
+                        une formation orientée vers l’administration des systèmes, des réseaux
+                        et des services informatiques.
+                    </p>
+
+                    <p>
+                        Au cours de cette formation, je développe des compétences en
+                        <strong>Windows Server</strong>, <strong>Linux</strong>,
+                        <strong>Active Directory</strong>, <strong>DHCP/DNS</strong>,
+                        virtualisation, support utilisateur et sécurité réseau.
+                    </p>
+
+                    <p>
+                        Mes projets et mes stages me permettent également de mieux comprendre
+                        le fonctionnement d’une infrastructure informatique et les besoins
+                        techniques d’une organisation.
+                    </p>
+                </div>
+
+                <div class="content-box">
+                    <h2>Mon projet suivant</h2>
+
+                    <p>
+                        Pour la suite de mon parcours, je souhaite poursuivre vers un
+                        <strong>Bachelor ou une Licence en administration systèmes et réseaux</strong>,
+                        idéalement en alternance.
+                    </p>
+
+                    <p>
+                        Je recherche une alternance dans le domaine de
+                        <strong>l’administration systèmes et réseaux</strong>,
+                        du <strong>support informatique</strong> ou de
+                        <strong>l’infrastructure IT</strong>.
+                    </p>
+
+                    <p>
+                        Mon objectif est de renforcer mes compétences techniques en entreprise
+                        et de progresser vers le métier d’<strong>administratrice systèmes et réseaux</strong>,
+                        avec une ouverture vers la cybersécurité.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- CE QUE JE RECHERCHE -->
+            <div class="content-box search-box">
+                <h2>Ce que je recherche</h2>
+
+                <p>
+                    Je recherche une <strong>alternance</strong> dans le domaine de l’administration
+                    systèmes et réseaux, du support informatique ou de l’infrastructure IT.
+                </p>
+
+                <p>
+                    Je souhaite intégrer une structure où je pourrai participer à des missions concrètes :
+                    gestion de serveurs, support utilisateur, configuration réseau, Active Directory,
+                    virtualisation, supervision et sécurisation des services informatiques.
+                </p>
+
+                <p>
+                    Mon objectif est de progresser dans un environnement professionnel, d’appliquer
+                    mes compétences techniques et de continuer à construire mon projet vers le métier
+                    d’<strong>administratrice systèmes et réseaux</strong>.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 - Portfolio Annaelle Mpassi NG | BTS SIO option SISR</p>
+    </footer>
+
+</body>
+</html>
